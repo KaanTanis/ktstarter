@@ -7,14 +7,14 @@ import { EasePack } from "gsap/EasePack";
 
 import Clipboard from "@ryangjchandler/alpine-clipboard"
 
-import Prism from "prismjs";
-import "prismjs/components/prism-markup-templating";
-import "prismjs/components/prism-php";
-import "prism-themes/themes/prism-coldark-dark.css";
+// import Prism from "prismjs";
+// import "prismjs/components/prism-markup-templating";
+// import "prismjs/components/prism-php";
+// import "prism-themes/themes/prism-coldark-dark.css";
 
-document.addEventListener("livewire:navigated", () => {
-    Prism.highlightAll();
-});
+// document.addEventListener("livewire:navigated", () => {
+//     Prism.highlightAll();
+// });
 
 Alpine.plugin(
     Clipboard.configure({

@@ -13,7 +13,7 @@ class TagSeeder extends Seeder
     {
         $tags = [
             'Blog',
-            'Haberler'
+            'Haberler',
         ];
 
         collect($tags)->each(function ($tag) {

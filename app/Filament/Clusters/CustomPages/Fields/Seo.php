@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Clusters\Pages\Fields;
+namespace App\Filament\Clusters\CustomPages\Fields;
 
 use App\Models\Setting;
 use Filament\Forms\Components\Section;

@@ -1,38 +1,33 @@
 <?php
 
-namespace App\Filament\Clusters\Pages\Pages;
+namespace App\Filament\Clusters\CustomPages\Pages;
 
-use App\Filament\Clusters\Pages;
-use App\Filament\Clusters\Pages\Fields\Seo;
+use App\Filament\Clusters\CustomPages;
+use App\Filament\Clusters\CustomPages\Fields\Seo;
 use App\Models\Page as ModelsPage;
 use Filament\Actions\Action;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 
-class About extends Page
+class Blogs extends Page
 {
     use InteractsWithForms;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
-    protected static string $view = 'filament.clusters.pages.pages.about';
+    protected static string $view = 'filament.clusters.custom-pages.pages.about';
 
-    protected static ?string $cluster = Pages::class;
+    protected static ?string $cluster = CustomPages::class;
 
-    protected ?string $model = Pages::class;
+    protected static ?string $navigationLabel = 'Bloglar';
 
-    protected static ?string $navigationLabel = 'Hakkımda';
+    protected ?string $heading = 'Bloglar';
 
     public ?array $data = [];
 
-    protected $pageType = 'about';
+    protected $pageType = 'blogs';
 
     public function mount()
     {
@@ -45,9 +40,6 @@ class About extends Page
     {
         return $form->schema([
             Seo::getFields(),
-
-            RichEditor::make('data.content')
-                ->label('İçerik'),
         ]);
     }
 

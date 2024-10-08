@@ -53,7 +53,6 @@ class BlogResource extends Resource
                                     })
                                     ->required(),
 
-                                // @todo slug
                                 TextInput::make('slug')
                                     ->label('URL')
                                     ->required(),
