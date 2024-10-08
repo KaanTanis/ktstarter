@@ -48,7 +48,7 @@ class GenerateSitemap extends Command
             ->add(Url::create(route('about'))
                 ->setPriority(0.5)
                 ->setLastModificationDate(Carbon::parse($aboutLastChange))
-                ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+                ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY));
 
         Blog::chunk(100, function ($blogs) use ($sitemap) {
             foreach ($blogs as $blog) {
