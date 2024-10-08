@@ -22,11 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Blade::directive('route', function ($expression) {
-            return "<?php echo route($expression); ?>";
-        });
-
-        // force https
         if (config('app.env') === 'production') {
             URL::forceScheme('https');
         }

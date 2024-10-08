@@ -23,7 +23,7 @@ class BlogFactory extends Factory
             'title' => $title = $this->faker->sentence,
             'slug' => str()->slug($title),
             'content' => $this->faker->paragraphs(5, true),
-            'cover' => $this->uploadFilePublicPath('assets/img/yellow.jpg'),
+            'cover' => $this->uploadFilePublicPath('assets/img/blog.jpg'),
             'published_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'seo_title' => $this->faker->sentence,
             'seo_description' => $this->faker->paragraph,

@@ -15,7 +15,7 @@ class SettingSeeder extends Seeder
         Setting::insert([
             [
                 'key' => 'site_title',
-                'value' => 'Kaan Tanış - Software Developer & UI Designer',
+                'value' => 'SİTE BAŞLIK',
             ],
             [
                 'key' => 'site_title_sperator',
@@ -31,11 +31,11 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key' => 'seo_title',
-                'value' => 'Kaan Tanış',
+                'value' => 'SEO BAŞLIK',
             ],
             [
                 'key' => 'seo_description',
-                'value' => 'Kaan Tanış, Software Developer & UI Designer. Laravel, Livewire, Design, Frontend, Backend, Full Stack Web Developer.',
+                'value' => 'SEO AÇIKLAMA',
             ],
         ]);
     }

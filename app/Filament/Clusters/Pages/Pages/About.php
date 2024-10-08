@@ -46,44 +46,8 @@ class About extends Page
         return $form->schema([
             Seo::getFields(),
 
-            Section::make('Hero')
-                ->label('Hero')
-                ->schema([
-                    TextInput::make('data.hero.title')
-                        ->label('Başlık'),
-
-                    Repeater::make('data.hero.titles')
-                        ->label('Başlıklar')
-                        ->addActionLabel('Başlık Ekle')
-                        ->schema([
-                            TextInput::make('title')
-                                ->label('Başlık'),
-                        ]),
-                ]),
-
             RichEditor::make('data.content')
                 ->label('İçerik'),
-
-            Section::make('Teknolojiler')
-                ->statePath('data.technologies')
-                ->schema([
-                    TextInput::make('title')
-                        ->label('Başlık'),
-
-                    Repeater::make('technologies')
-                        ->label('Teknolojiler')
-                        ->addActionLabel('Teknoloji Ekle')
-                        ->schema([
-                            TextInput::make('title')
-                                ->label('Başlık'),
-
-                            FileUpload::make('logo')
-                                ->label('Logo')
-                                ->image()
-                                ->imageEditor()
-                                ->webp(),
-                        ]),
-                ]),
         ]);
     }
 

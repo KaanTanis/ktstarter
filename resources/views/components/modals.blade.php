@@ -1,14 +1,3 @@
-<dialog id="offerForm" class="modal">
-    <div class="modal-box w-11/12 max-w-5xl">
-        <livewire:contact-form classes="modal-backdrop text-base-content" />
-        <div class="modal-action">
-            <form method="dialog">
-                <button class="btn">@lang('Kapat')</button>
-            </form>
-        </div>
-    </div>
-</dialog>
-
 <dialog id="privacyModal" class="modal">
     <div class="modal-box w-11/12 max-w-7xl prose">
         {!! App\Models\Setting::getValueByKey('privacy_policy') !!}

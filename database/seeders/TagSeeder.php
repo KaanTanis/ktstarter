@@ -12,10 +12,8 @@ class TagSeeder extends Seeder
     public function run(): void
     {
         $tags = [
-            'Laravel',
-            'PHP',
-            'JavaScript',
-            'Vue.js',
+            'Blog',
+            'Haberler'
         ];
 
         collect($tags)->each(function ($tag) {
