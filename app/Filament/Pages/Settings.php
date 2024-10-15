@@ -30,6 +30,8 @@ class Settings extends Page implements HasForms
 
     protected ?string $model = Setting::class;
 
+    protected ?string $heading = 'Ayarlar';
+
     public ?array $data = [];
 
     public static function getNavigationLabel(): string

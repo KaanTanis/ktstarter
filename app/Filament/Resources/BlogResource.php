@@ -32,6 +32,8 @@ class BlogResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Bloglar';
 
+    protected static ?string $navigationGroup = 'CMS';
+
     public static function form(Form $form): Form
     {
         return $form

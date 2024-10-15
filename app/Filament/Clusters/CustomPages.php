@@ -11,4 +11,6 @@ class CustomPages extends Cluster
     protected static ?string $navigationLabel = 'Sayfalar';
 
     protected static ?string $clusterBreadcrumb = 'Sayfalar';
+
+    protected static ?string $navigationGroup = 'CMS';
 }
