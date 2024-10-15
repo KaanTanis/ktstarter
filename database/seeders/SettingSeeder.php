@@ -15,27 +15,27 @@ class SettingSeeder extends Seeder
         Setting::insert([
             [
                 'key' => 'site_title',
-                'value' => 'SİTE BAŞLIK',
+                'value' => json_encode(['SİTE BAŞLIK']),
             ],
             [
                 'key' => 'site_title_sperator',
-                'value' => '|',
+                'value' => json_encode(['|']),
             ],
             [
                 'key' => 'site_status',
-                'value' => true,
+                'value' => json_encode([true]),
             ],
             [
                 'key' => 'site_status_description',
-                'value' => 'Sitemiz şu an bakım aşamasındadır. Lütfen daha sonra tekrar deneyiniz.',
+                'value' => json_encode(['Sitemiz şu an bakım aşamasındadır. Lütfen daha sonra tekrar deneyiniz.']),
             ],
             [
                 'key' => 'seo_title',
-                'value' => 'SEO BAŞLIK',
+                'value' => json_encode(['SEO BAŞLIK']),
             ],
             [
                 'key' => 'seo_description',
-                'value' => 'SEO AÇIKLAMA',
+                'value' => json_encode(['SEO AÇIKLAMA']),
             ],
         ]);
     }

@@ -16,7 +16,7 @@ class Setting extends Model
     public $incrementing = false;
 
     protected $casts = [
-        'value' => 'string',
+        'value' => 'array',
     ];
 
     public static function getValueByKey($key)

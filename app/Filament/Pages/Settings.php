@@ -5,7 +5,9 @@ namespace App\Filament\Pages;
 use App\Models\Setting;
 use Filament\Actions\Action;
 use Filament\Forms\ComponentContainer;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\Textarea;
@@ -16,6 +18,7 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * @property ComponentContainer $form
@@ -95,6 +98,34 @@ class Settings extends Page implements HasForms
                                     ->label(__('Çerez Bildirisi'))
                                     ->columnSpan(2),
                             ]),
+
+                        Tab::make('Redirection')
+                            ->label(__('Yönlendirme Ayarları'))
+                            ->schema([
+                                Repeater::make('redirections')
+                                    ->label('Yönlendirmeler')
+                                    ->addActionLabel(__('Yönlendirme Ekle'))
+                                    ->schema([
+                                        Select::make('status_code')
+                                            ->label(__('HTTP Durum Kodu'))
+                                            ->options([
+                                                '301' => '301 - Kalıcı Yönlendirme',
+                                                '302' => '302 - Geçici Yönlendirme',
+                                            ])
+                                            ->columnSpan(2)
+                                            ->required(),
+
+                                        TextInput::make('old_url')
+                                            ->label(__('Eski URL'))
+                                            ->columnSpanFull()
+                                            ->required(),
+
+                                        TextInput::make('new_url')
+                                            ->label(__('Yeni URL'))
+                                            ->columnSpanFull()
+                                            ->required(),
+                                    ]),
+                            ]),
                     ]),
             ])
             ->statePath('data')
@@ -113,6 +144,8 @@ class Settings extends Page implements HasForms
     public function save(): void
     {
         try {
+            Cache::forget('redirections');
+
             $data = $this->form->getState();
 
             foreach ($data as $key => $value) {
