@@ -2,7 +2,6 @@
 import preset from "./vendor/filament/support/tailwind.config.preset";
 
 import daisyui from "daisyui";
-import { light, dark } from "daisyui/src/theming/themes";
 
 export default {
     presets: [preset],
@@ -30,10 +29,7 @@ export default {
         },
     },
     daisyui: {
-        themes: [
-            light,
-            dark
-        ],
+        themes: true,
     },
     safelist: ["text-warning", "text-danger", "text-success", "text-info"],
     plugins: [require("@tailwindcss/typography"), daisyui],

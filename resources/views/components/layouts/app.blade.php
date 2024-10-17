@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-        data-theme="ktlight"
+        data-theme="light"
         class="overflow-x-hidden scroll-smooth"
     >
     <head>
@@ -28,6 +28,9 @@
 
         @filamentStyles
         @filamentScripts
+
+        @livewireStyles
+        
         @vite(['resources/js/app.js', 'resources/css/app.css'])
         @livewire('notifications')
     </head>
@@ -41,5 +44,7 @@
         <x-modals />
 
         @stack('footer')
+
+        @livewireScriptConfig
     </body>
 </html>

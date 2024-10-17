@@ -14,9 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->trustProxies(at: '*');
         $middleware->web(append: [
-            \Fahlisaputra\Minify\Middleware\MinifyHtml::class,
-            \Fahlisaputra\Minify\Middleware\MinifyCss::class,
-            \Fahlisaputra\Minify\Middleware\MinifyJavascript::class,
+            // \Fahlisaputra\Minify\Middleware\MinifyHtml::class,
+            // \Fahlisaputra\Minify\Middleware\MinifyCss::class,
+            // \Fahlisaputra\Minify\Middleware\MinifyJavascript::class,
         ]);
         $middleware->use([
             \Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks::class,

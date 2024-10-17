@@ -5,6 +5,11 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { TextPlugin } from "gsap/TextPlugin";
 import { EasePack } from "gsap/EasePack";
 
+import {
+    Livewire,
+    Alpine,
+} from "../../vendor/livewire/livewire/dist/livewire.esm";
+
 import Clipboard from "@ryangjchandler/alpine-clipboard"
 
 // import Prism from "prismjs";
@@ -27,6 +32,8 @@ Alpine.plugin(
         },
     })
 );
+
+Livewire.start();
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, TextPlugin, EasePack);
 

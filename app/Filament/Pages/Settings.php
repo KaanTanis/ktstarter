@@ -151,7 +151,10 @@ class Settings extends Page implements HasForms
             foreach ($data as $key => $value) {
                 Setting::updateOrCreate(
                     ['key' => $key],
-                    ['value' => $value]
+                    [
+                        'value' => $value,
+                        'data_type' => gettype(is_array($value) ? head($value) : $value),
+                    ]
                 );
             }
 

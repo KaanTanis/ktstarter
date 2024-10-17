@@ -1,10 +1,15 @@
 <x-layouts.app>
+
+@php
+    $description = App\Models\Setting::getValueByKey('site_status_description');
+@endphp
+
 <div class="h-screen w-screen bg-gray-50 flex items-center">
     <div class="container flex flex-col md:flex-row items-center justify-between px-5 text-gray-700">
             <div class="w-full lg:w-1/2 mx-8">
-                <div class="text-7xl text-primary font-dark font-extrabold mb-8">404</div>
+                <div class="text-7xl text-primary font-dark font-extrabold mb-8">503 - @lang('Bakım Çalışması')</div>
             <p class="text-2xl md:text-3xl font-light leading-normal mb-8">
-                @lang('Üzgünüz, aradığınız sayfa bulunamadı.')
+                {{ $description }}
             </p>
             
             <a href="{{ route('home') }}" class="btn btn-primary">
