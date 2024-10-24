@@ -11,7 +11,7 @@
         {
             "type": "git",
             "url": "https://github.com/KaanTanis/filament-simple-webp.git"
-        },
+        }
     ],
     "require": {
         "php": "^8.2",
