@@ -9,4 +9,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', Home::class)->name('home');
 Route::get('/bloglar', Blogs::class)->name('blogs');
 Route::get('/bloglar/{slug}', Blog::class)->name('blog');
-Route::get('/hakkimda', About::class)->name('about');
+Route::get('/hakkimizda', About::class)->name('about');

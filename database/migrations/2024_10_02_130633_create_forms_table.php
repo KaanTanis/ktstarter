@@ -16,8 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->json('services');
-            $table->string('budget');
             $table->text('message')->nullable();
             $table->string('status')->default('pending');
             $table->string('ip_address')->nullable();

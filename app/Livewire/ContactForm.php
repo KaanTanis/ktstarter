@@ -23,12 +23,6 @@ class ContactForm extends Component
     #[Validate('required', as: 'Telefon Numarası', translate: true)]
     public string $phone = '';
 
-    #[Validate('required', as: 'Hizmetler', translate: true)]
-    public array $services = [];
-
-    #[Validate('required|in:0,25,50,75', as: 'Bütçe', translate: true)]
-    public int $budget = 25;
-
     #[Validate('required', as: 'Mesaj', translate: true)]
     public string $message = '';
 
@@ -89,8 +83,6 @@ class ContactForm extends Component
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
-            'services' => $this->services,
-            'budget' => $this->budget,
             'message' => $this->message,
         ];
     }
