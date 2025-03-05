@@ -43,18 +43,6 @@ window.gsap = gsap;
 
 import "./gsap";
 
-document.addEventListener("livewire:navigated", () => {
-    const preloader = document.getElementById("preloader");
-
-    if (preloader) {
-        preloader.classList.add("hidden");
-    }
-});
-
-document.addEventListener("contact-form:submitted", function () {
-    offerForm.close();
-});
-
 document.addEventListener("livewire:navigated", function () {
     let acceptCookieBtn = document.getElementById("acceptCookie");
 

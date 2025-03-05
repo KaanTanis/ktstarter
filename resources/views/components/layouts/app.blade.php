@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-        data-theme="light"
+        data-theme="dark"
         class="overflow-x-hidden scroll-smooth"
     >
     <head>
@@ -36,7 +36,6 @@
     </head>
     
     <body class="overflow-x-hidden!">
-        <x-preloader />
         <x-layouts.navbar />
 
         {{ $slot }}
