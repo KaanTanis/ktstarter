@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import preset from "./vendor/filament/support/tailwind.config.preset";
 
-import daisyui from "daisyui";
-
 export default {
     presets: [preset],
     content: [
@@ -28,9 +26,6 @@ export default {
             },
         },
     },
-    daisyui: {
-        themes: true,
-    },
     safelist: ["text-warning", "text-danger", "text-success", "text-info"],
-    plugins: [require("@tailwindcss/typography"), daisyui],
+    plugins: [require("@tailwindcss/typography")],
 };
