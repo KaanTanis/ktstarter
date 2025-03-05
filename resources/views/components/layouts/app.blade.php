@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-        data-theme="dark"
+        data-theme="light"
         class="overflow-x-hidden scroll-smooth"
     >
     <head>
