@@ -35,7 +35,7 @@
         @livewire('notifications')
     </head>
     
-    <body class="!overflow-x-hidden">
+    <body class="overflow-x-hidden!">
         <x-preloader />
         <x-layouts.navbar />
 

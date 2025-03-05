@@ -87,8 +87,7 @@ class BlogResource extends Resource
                                     ->imageEditorAspectRatios([
                                         null,
                                         '4:3',
-                                    ])
-                                    ->webp(),
+                                    ]),
 
                                 FileUpload::make('banner')
                                     ->label('Banner Fotoğrafı')
@@ -97,8 +96,7 @@ class BlogResource extends Resource
                                     ->imageEditorAspectRatios([
                                         null,
                                         '5:1',
-                                    ])
-                                    ->webp(),
+                                    ]),
 
                                 TextInput::make('seo_title')
                                     ->label('SEO Başlık'),
