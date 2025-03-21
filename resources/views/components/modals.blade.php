@@ -21,7 +21,7 @@
 </dialog>
 
 <div id="cookieConsent"
-    class="bg-primary text-primary-content fixed z-50 p-2 sm:rounded-full drop-shadow-2xl bottom-0 left-0 sm:bottom-8 sm:right-8 sm:left-auto hidden"
+    class="bg-primary text-primary-content fixed z-50 p-2 drop-shadow-2xl bottom-0 left-0 sm:bottom-8 sm:right-8 sm:left-auto hidden"
 >
     <div class="flex items-center justify-between gap-6 text-sm">
         <div class="content-left pl-4">
@@ -29,8 +29,8 @@
             <span onclick="cookieModal.showModal()" class="sm:hidden underline text-xs">@lang('Detaylar')</span>
         </div>
         <div class="content-right text-end flex gap-y-2">
-            <button class="btn btn-ghost px-4 py-2 cursor-pointer rounded-full underline hidden sm:block" onclick="cookieModal.showModal()">@lang('Detaylar')</button>
-            <button id="acceptCookie" class="btn px-4 py-2 cursor-pointer rounded-full w-24 sm:w-auto">@lang('Kabul Et')</button>
+            <button class="btn btn-ghost px-4 py-2 cursor-pointer underline hidden sm:block" onclick="cookieModal.showModal()">@lang('Detaylar')</button>
+            <button id="acceptCookie" class="btn px-4 py-2 cursor-pointer w-24 sm:w-auto">@lang('Kabul Et')</button>
         </div>
     </div>
 </div>

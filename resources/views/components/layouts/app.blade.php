@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-        data-theme="light"
+        data-theme="lofi"
         class="overflow-x-hidden scroll-smooth"
     >
     <head>
@@ -10,41 +10,34 @@
         @endif
 
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-        <link rel="icon" href="{{ asset('logo.svg') }}" type="image/svg+xml" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png" />
+        <link rel="apple-touch-icon" href="{{ asset('favicon.png') }}" type="image/png" />
 
         {!! SEO::generate() !!}
         
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <meta name="google-site-verification" content="G32AJZkQfctiXnbRQc-8bnEF-aXefwOr1Glxlv0BTN0" />
 
         <style>
             [x-cloak] {
                 display: none !important;
             }
         </style>
-
-        @filamentStyles
-        @filamentScripts
-
-        @livewireStyles
         
         @vite(['resources/js/app.js', 'resources/css/app.css'])
-        @livewire('notifications')
     </head>
     
-    <body class="!overflow-x-hidden">
+    <body class="!overflow-x-hidden antialiased">
         <x-preloader />
         <x-layouts.navbar />
 
-        {{ $slot }}
+        <main>
+            {{ $slot }}
+        </main>
         
         <x-modals />
 
         @stack('footer')
-
-        @livewireScriptConfig
     </body>
 </html>

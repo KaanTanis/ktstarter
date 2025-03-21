@@ -33,7 +33,6 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             TagSeeder::class,
             BlogSeeder::class,
-            PageSeeder::class,
         ]);
     }
 }

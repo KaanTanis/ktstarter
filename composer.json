@@ -8,10 +8,7 @@
     ],
     "license": "MIT",
     "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/KaanTanis/filament-simple-webp.git"
-        }
+        
     ],
     "require": {
         "php": "^8.2",
@@ -20,14 +17,15 @@
         "cyrildewit/eloquent-viewable": "^7.0",
         "fahlisaputra/laravel-minify": "^1.1",
         "filament/filament": "^3.2",
-        "kaantanis/filament-simple-webp": "@dev",
+        "intervention/image": "^3.11",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "mohamedsabil83/filament-forms-tinyeditor": "^2.3",
         "spatie/eloquent-sortable": "^4.4",
         "spatie/laravel-sitemap": "^7.2",
-        "spatie/laravel-sluggable": "^3.6"
+        "spatie/laravel-sluggable": "^3.6",
+        "z3d0x/filament-fabricator": "^2.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

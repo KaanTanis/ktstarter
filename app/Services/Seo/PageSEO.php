@@ -4,10 +4,10 @@ namespace App\Services\Seo;
 
 use App\Models\Page;
 use App\Models\Setting;
-use Artesaos\SEOTools\Contracts\SEOFriendly;
 use Artesaos\SEOTools\Contracts\SEOTools;
+use Artesaos\SEOTools\Contracts\SEOFriendly;
 
-class AboutSEO implements SEOFriendly
+class PageSEO implements SEOFriendly
 {
     public function __construct(public Page $page) {}
 
@@ -22,9 +22,9 @@ class AboutSEO implements SEOFriendly
         // Genel Meta Etiketler
         $seoTools->setTitle($title)
             ->setDescription($description)
-            ->setCanonical(route('about'));
+            ->setCanonical(url('/'));
 
-        $imageUrl = asset('logo.svg');
+        $imageUrl = asset('logo.png');
 
         if ($imageUrl) {
             $seoTools->addImages($imageUrl);
@@ -33,42 +33,31 @@ class AboutSEO implements SEOFriendly
         // OpenGraph Ayarları
         $seoTools->opengraph()->addProperty('locale', app()->getLocale())
             ->addProperty('type', 'website')
-            ->addProperty('site_name', 'Kaan Tanış')
+            ->addProperty('site_name', config('app.name'))
             ->addProperty('description', $description)
             ->addProperty('title', $title)
-            ->addProperty('application-name', 'Kaan Tanış')
+            ->addProperty('application-name', config('app.name'))
             ->addProperty('url', url('/'));
-
-        // Twitter Card Ayarları
-        $seoTools->twitter()->addValue('card', 'summary_large_image')
-            ->addValue('site', '@kaantns')
-            ->addValue('creator', '@kaantns')
-            ->addValue('description', $description);
 
         // JSON-LD Yapılandırılmış Veri
         $jsonLd = $seoTools->jsonLdMulti();
-        $jsonLd->setType('WebPage');
+        $jsonLd->setType('WebSite');
         $jsonLd->addValues([
             '@id' => url('/'),
             'url' => url('/'),
             'name' => $title,
             'headline' => $title,
             'description' => $description,
-            'sameAs' => [
-                'https://www.instagram.com/kaan.tns',
-                'https://www.linkedin.com/in/kaan-tanış-4a317a250/',
-                'https://twitter.com/kaantns',
-            ],
             'isPartOf' => [
                 '@id' => url('/').'/#website',
             ],
             'publisher' => [
                 '@id' => url('/').'/#organization',
                 '@type' => 'Organization',
-                'name' => 'Kaan Tanış',
+                'name' => config('app.name'),
                 'logo' => [
                     '@type' => 'ImageObject',
-                    'url' => url('/logo.svg'),
+                    'url' => url('/logo.png'),
                     'width' => 300,
                     'height' => 300,
                 ],
@@ -82,24 +71,6 @@ class AboutSEO implements SEOFriendly
                 'url' => $imageUrl,
                 'height' => 800,
                 'width' => 1200,
-            ],
-        ]);
-
-        $jsonLd->addValue('breadcrumb', [
-            '@type' => 'BreadcrumbList',
-            'itemListElement' => [
-                [
-                    '@type' => 'ListItem',
-                    'position' => 1,
-                    'name' => trans('Ana Sayfa'),
-                    'item' => url('/'),
-                ],
-                [
-                    '@type' => 'ListItem',
-                    'position' => 2,
-                    'name' => trans('Hakkımda'),
-                    'item' => route('about'),
-                ],
             ],
         ]);
     }

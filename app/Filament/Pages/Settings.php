@@ -62,28 +62,11 @@ class Settings extends Page implements HasForms
                     ->tabs([
                         Tab::make(__('Site Ayarları'))
                             ->schema([
-                                TextInput::make('site_title')
-                                    ->label(__('Site Başlığı')),
-
-                                TextInput::make('site_title_sperator')
-                                    ->label(__('Site Başlık Ayraç')),
-
                                 Toggle::make('site_status')
-                                    ->label(__('Site Durumu'))
-                                    ->columnSpan(2),
-
+                                    ->label(__('Site Durumu')),
                                 TextInput::make('site_status_description')
-                                    ->label(__('Site Durum Açıklaması'))
-                                    ->columnSpan(2),
-                            ])->columns(2),
-
-                        Tab::make(__('SEO Ayarları'))
-                            ->schema([
-                                TextInput::make('seo_title')
-                                    ->label(__('SEO Başlığı')),
-                                Textarea::make('seo_description')
-                                    ->label(__('SEO Açıklaması')),
-                            ])->columns(2),
+                                    ->label(__('Site Durum Açıklaması')),
+                            ]),
 
                         Tab::make('Gizlilik Politikası')
                             ->schema([

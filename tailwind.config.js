@@ -29,7 +29,13 @@ export default {
         },
     },
     daisyui: {
-        themes: true,
+        themes: [
+            {
+                nord: {
+                    ...require("daisyui/src/theming/themes")["lofi"],
+                },
+            },
+        ],
     },
     safelist: ["text-warning", "text-danger", "text-success", "text-info"],
     plugins: [require("@tailwindcss/typography"), daisyui],

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\RedirectMiddleware;
+use App\Http\Middleware\SiteStatusMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -17,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
             // \Fahlisaputra\Minify\Middleware\MinifyHtml::class,
             // \Fahlisaputra\Minify\Middleware\MinifyCss::class,
             // \Fahlisaputra\Minify\Middleware\MinifyJavascript::class,
+            SiteStatusMiddleware::class
         ]);
         $middleware->use([
             \Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks::class,

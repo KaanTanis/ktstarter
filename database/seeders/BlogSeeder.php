@@ -13,7 +13,7 @@ class BlogSeeder extends Seeder
     {
         $tags = \App\Models\Tag::all();
 
-        \App\Models\Blog::factory(10)->create()->each(function ($blog) use ($tags) {
+        \App\Models\Blog::factory(3)->create()->each(function ($blog) use ($tags) {
             $blog->tags()->attach($tags->random(rand(1, 2))->pluck('id')->toArray());
         });
     }
