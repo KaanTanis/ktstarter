@@ -14,7 +14,7 @@ class TextBlock extends PageBlock
             ->label('Metin')
             ->schema([
                 Textarea::make('text')
-                    ->label('Metin')
+                    ->label('Metin'),
             ]);
     }
 

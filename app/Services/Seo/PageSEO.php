@@ -4,8 +4,8 @@ namespace App\Services\Seo;
 
 use App\Models\Page;
 use App\Models\Setting;
-use Artesaos\SEOTools\Contracts\SEOTools;
 use Artesaos\SEOTools\Contracts\SEOFriendly;
+use Artesaos\SEOTools\Contracts\SEOTools;
 
 class PageSEO implements SEOFriendly
 {

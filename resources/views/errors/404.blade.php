@@ -7,7 +7,7 @@
                 @lang('Üzgünüz, aradığınız sayfa bulunamadı.')
             </p>
             
-            <a href="{{ route('home') }}" class="btn btn-primary">
+            <a href="{{ url('/') }}" class="btn btn-primary">
                 @lang('Ana Sayfaya Dön')
             </a>
     </div>

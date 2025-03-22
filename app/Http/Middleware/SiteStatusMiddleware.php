@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use App\Models\Setting;
 use Closure;
-use Illuminate\Container\Attributes\Cache;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
