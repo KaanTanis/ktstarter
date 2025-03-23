@@ -1,3 +1,7 @@
+@props([
+    'page' => null,
+])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
         data-theme="lofi"

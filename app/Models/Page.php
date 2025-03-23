@@ -4,7 +4,6 @@ namespace App\Models;
 
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Blade;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -17,16 +16,11 @@ use Z3d0X\FilamentFabricator\Models\Page as BasePage;
  */
 class Page extends BasePage implements Viewable
 {
-    use InteractsWithViews;
     use HasSlug;
     use HasTranslations;
+    use InteractsWithViews;
 
     public $translatable = ['title', 'slug', 'blocks'];
-
-    protected static function booted()
-    {
-        // Don't override parent::booted() because it blocks the logging on delete
-    }
 
     public function render(): string
     {

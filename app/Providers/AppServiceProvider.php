@@ -29,6 +29,14 @@ class AppServiceProvider extends ServiceProvider
         setlocale(LC_TIME, config('app.locale'));
         Carbon::setLocale(config('app.locale'));
 
-        Model::shouldBeStrict();
+        $this->configureModel();
+    }
+
+    protected function configureModel(): void
+    {
+        Model::shouldBeStrict(! $this->app->isProduction());
+        Model::preventLazyLoading(! $this->app->isProduction());
+        Model::preventSilentlyDiscardingAttributes(! $this->app->isProduction());
+        Model::unguard();
     }
 }

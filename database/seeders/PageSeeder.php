@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Filament\Fabricator\Layouts\DefaultLayout;
 use App\Models\Page;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PageSeeder extends Seeder
@@ -15,15 +14,22 @@ class PageSeeder extends Seeder
     public function run(): void
     {
         Page::updateOrCreate([
-            'title' => 'Ana Sayfa',
-            'slug' => '/',
+            'slug->tr' => '/',
+            'slug->en' => '/',
         ], [
             'layout' => DefaultLayout::getName(),
+            'title' => [
+                'tr' => 'Ana Sayfa',
+                'en' => 'Home',
+            ],
             'blocks' => [
-                $this->createBlock('text', [
-                    'text' => 'lorem ipsum dolor sit amet consectetur adipiscing elit'
-                ])
-            ]
+                'tr' => $tr = [
+                    $this->createBlock('text', [
+                        'text' => 'lorem ipsum dolor sit amet consectetur adipiscing elit',
+                    ]),
+                ],
+                'en' => $tr,
+            ],
         ]);
     }
 

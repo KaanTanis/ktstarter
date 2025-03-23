@@ -3,6 +3,7 @@
 // config for Z3d0X/FilamentFabricator
 
 use App\Filament\Resources\PageResource;
+use App\Models\Page;
 
 return [
     'routing' => [
@@ -30,7 +31,7 @@ return [
         'web',
     ],
 
-    'page-model' => \Z3d0X\FilamentFabricator\Models\Page::class,
+    'page-model' => Page::class,
 
     'page-resource' => PageResource::class,
 
