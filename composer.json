@@ -17,6 +17,7 @@
         "cyrildewit/eloquent-viewable": "^7.0",
         "fahlisaputra/laravel-minify": "^1.1",
         "filament/filament": "^3.2",
+        "filament/spatie-laravel-translatable-plugin": "^3.3",
         "intervention/image": "^3.11",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
