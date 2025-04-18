@@ -43,16 +43,19 @@ window.gsap = gsap;
 
 import "./gsap";
 
+// splide
+import "@splidejs/splide/css/core";
+
+import Splide from "@splidejs/splide";
+
+window.Splide = Splide;
+
 document.addEventListener("livewire:navigated", () => {
     const preloader = document.getElementById("preloader");
 
     if (preloader) {
         preloader.classList.add("hidden");
     }
-});
-
-document.addEventListener("contact-form:submitted", function () {
-    offerForm.close();
 });
 
 document.addEventListener("livewire:navigated", function () {
@@ -71,3 +74,31 @@ document.addEventListener("livewire:navigated", function () {
         document.getElementById("cookieConsent").classList.remove("hidden");
     }
 })
+
+import { Fancybox } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
+
+Fancybox.bind("[data-fancybox]", {
+    // Your custom options
+});
+
+document.addEventListener("click", function (event) {
+    if (event.target.matches(".navMenu a")) {
+        document.getElementById("my-drawer").checked = false;
+        document.getElementById("my-drawer").classList.remove("open");
+        document.getElementById("my-drawer").classList.add("close");
+
+        let target = event.target.getAttribute("href");
+        if (target.startsWith("/")) {
+            target = target.substring(1);
+        }
+        let offset = document.querySelector(target).offsetTop;
+
+        gsap.to(window, {
+            duration: 0.5,
+            scrollTo: { y: offset, autoKill: false },
+        });
+
+        return false;
+    }
+});

@@ -29,7 +29,11 @@
             }
         </style>
         
+        @filamentStyles
+        @livewireStyles
+        @filamentScripts
         @vite(['resources/js/app.js', 'resources/css/app.css'])
+        @livewire('notifications')
     </head>
     
     <body class="!overflow-x-hidden antialiased">
@@ -42,6 +46,8 @@
         
         <x-modals />
 
+        @livewireScriptConfig 
         @stack('footer')
+        <!--[if ENDBLOCK]>kaantanis.com<![endif]-->    
     </body>
 </html>
