@@ -9,7 +9,7 @@
                 </a>
             </div>
             <div class="hidden xl:block">
-                <ul class="flex items-center gap-x-12 [&>li>a]:font-semibold text-base-content/80 [&>li>a]:transition-all navMenu">
+                <ul class="menu lg:menu-horizontal rounded-box navMenu [&>li>*]:text-base [&>li>*]:font-semibold text-base-content/80 [&>li>a]:transition-all navMenu">
                     <x-menu />
                 </ul>
             </div>
@@ -33,7 +33,7 @@
 
                             <div class="divider divider-primary"></div>
 
-                            <ul class="text-lg mt-4 navMenu">
+                            <ul class="menu lg:menu-horizontal rounded-box navMenu">
                                 <x-menu />
                             </ul>
 

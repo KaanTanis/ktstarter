@@ -11,20 +11,25 @@
     ])>@lang('Hakkımızda')</a>
 </li>
 <li>
-    <div class="dropdown dropdown-end dropdown-hover">
-        <div tabindex="0" role="button" @class([
-            'hover:text-base-content font-semibold',
-            'text-base-content !font-bold' => false,
-        ])>Dropdown</div>
-        <ul tabindex="0" class="dropdown-content menu bg-base-100 text-base-content rounded-box z-[1] w-52 p-2 shadow">
-            <li>
-                <a href="/seyirtepe-tarsus">Test</a>
-            </li>
-            <li>
-                <a href="/tiba-vadi">Test 2</a>
-            </li>
-        </ul>
-    </div>
+    <details>
+    <summary @class([
+        'hover:text-base-content',
+        'text-base-content !font-bold' => false
+    ])>Parent item</summary>
+    <ul>
+        <li><a>Submenu 1</a></li>
+        <li><a>Submenu 2</a></li>
+        <li>
+        <details>
+            <summary>Parent</summary>
+            <ul>
+            <li><a>item 1</a></li>
+            <li><a>item 2</a></li>
+            </ul>
+        </details>
+        </li>
+    </ul>
+    </details>
 </li>
 <li>
     <a href="#" @class([
