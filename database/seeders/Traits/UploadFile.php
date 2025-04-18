@@ -4,8 +4,8 @@ namespace Database\Seeders\Traits;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 trait UploadFile
 {
@@ -13,9 +13,6 @@ trait UploadFile
      * public içindeki bir dosyayı alır, işleyip storage/public içine kaydeder.
      *
      * @param  \Illuminate\Http\UploadedFile|string  $file
-     * @param  string|null  $destinationPath
-     * @param  int|null  $width
-     * @return string
      */
     public function uploadFilePublicPath($file, ?string $destinationPath = null, ?int $width = 1600): string
     {
@@ -25,7 +22,7 @@ trait UploadFile
             $file = ltrim($file, '/');
             $filePath = public_path($file);
 
-            if (!file_exists($filePath)) {
+            if (! file_exists($filePath)) {
                 throw new \Exception("Dosya bulunamadı: {$filePath}");
             }
 
@@ -34,7 +31,7 @@ trait UploadFile
             $filename = uniqid();
 
             if ($isImage) {
-                $imageManager = new ImageManager(new Driver());
+                $imageManager = new ImageManager(new Driver);
                 $image = $imageManager->read($filePath);
 
                 if ($image->width() > $width) {
@@ -47,7 +44,7 @@ trait UploadFile
 
                 $image->save($newPath, quality: 80, format: 'webp');
             } else {
-                $filename .= '.' . $originalExtension;
+                $filename .= '.'.$originalExtension;
                 $newPath = storage_path("app/public/{$destinationPath}/{$filename}");
                 File::ensureDirectoryExists(dirname($newPath));
 
@@ -56,12 +53,12 @@ trait UploadFile
 
             return "storage/{$destinationPath}/{$filename}";
         }
-        
+
         $originalExtension = strtolower($file->getClientOriginalExtension());
-        $filename = uniqid() . '.' . $originalExtension;
+        $filename = uniqid().'.'.$originalExtension;
         $stored = $file->storeAs("public/{$destinationPath}", $filename);
 
-        if (!$stored) {
+        if (! $stored) {
             throw new \Exception('Dosya yüklenemedi.');
         }
 

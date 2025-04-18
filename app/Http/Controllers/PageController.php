@@ -23,7 +23,7 @@ class PageController extends Controller
         $this->loadSEO(new PageSEO($filamentFabricatorPage));
 
         views($filamentFabricatorPage)->cooldown(now()->addHours(6))->record();
-        
+
         return $filamentFabricatorPage->render();
     }
 }

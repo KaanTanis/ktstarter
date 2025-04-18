@@ -4,7 +4,6 @@ namespace App\Filament\Fabricator\PageBlocks;
 
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Textarea;
 use Z3d0X\FilamentFabricator\PageBlocks\PageBlock;
 
 class TextBlock extends PageBlock

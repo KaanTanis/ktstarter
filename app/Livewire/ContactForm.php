@@ -2,15 +2,15 @@
 
 namespace App\Livewire;
 
-use App\Models\Form;
-use Livewire\Component;
 use App\Mail\ContactMail;
-use Livewire\Attributes\Validate;
-use Illuminate\Support\Facades\Mail;
-use Filament\Notifications\Notification;
-use Illuminate\Validation\ValidationException;
-use DanHarrin\LivewireRateLimiting\WithRateLimiting;
+use App\Models\Form;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
+use DanHarrin\LivewireRateLimiting\WithRateLimiting;
+use Filament\Notifications\Notification;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\ValidationException;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 
 class ContactForm extends Component
 {
@@ -31,6 +31,7 @@ class ContactForm extends Component
     public ?string $classes = null;
 
     public ?string $title = null;
+
     public ?string $subtitle = null;
 
     public function mount($title, $subtitle)

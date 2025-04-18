@@ -2,10 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Blog;
 use App\Models\Page;
 use App\Models\Project;
-use App\Models\Tag;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -42,20 +40,20 @@ class GenerateSitemap extends Command
                 ->setLastModificationDate(Carbon::parse($homeLastChange))
                 ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY));
 
-            // Project::chunk(100, function ($projects) use ($sitemap) {
-            //     foreach ($projects as $project) {
-            //         $url = Url::create(route('project', $project->slug))
-            //             ->setLastModificationDate($project->updated_at)
-            //             ->setPriority(0.9)
-            //             ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY);
+        // Project::chunk(100, function ($projects) use ($sitemap) {
+        //     foreach ($projects as $project) {
+        //         $url = Url::create(route('project', $project->slug))
+        //             ->setLastModificationDate($project->updated_at)
+        //             ->setPriority(0.9)
+        //             ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY);
 
-            //         if ($project->cover_2) {
-            //             $url->addImage(Storage::url($project->cover_2));
-            //         }
+        //         if ($project->cover_2) {
+        //             $url->addImage(Storage::url($project->cover_2));
+        //         }
 
-            //         $sitemap->add($url);
-            //     }
-            // });
+        //         $sitemap->add($url);
+        //     }
+        // });
 
         $sitemap->writeToFile(public_path('sitemap.xml'));
     }
