@@ -4,7 +4,7 @@
 
 @aware(['page'])
 
-<section class="container mx-auto">
+<section class="container mx-auto py-12">
     <article class="prose !max-w-none">
         {!! $text !!}
     </article>

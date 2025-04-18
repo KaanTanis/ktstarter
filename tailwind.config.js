@@ -24,14 +24,14 @@ export default {
                 },
             },
             fontFamily: {
-                sans: ["Montserrat Alternates", "sans-serif"],
+                sans: ["Gilroy", "sans-serif"],
             },
         },
     },
     daisyui: {
         themes: [
             {
-                nord: {
+                lofi: {
                     ...require("daisyui/src/theming/themes")["lofi"],
                 },
             },

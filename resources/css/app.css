@@ -4,130 +4,153 @@
 
 @layer base {
     @font-face {
-        font-family: 'Montserrat Alternates';
+        font-family: "Gilroy";
         font-style: normal;
         font-weight: 100;
         font-display: swap;
-        src: url('@/fonts/Montserrat_Alternates/MontserratAlternates-Thin.ttf') format('truetype');
+        src: url('@/fonts/gilroy/Gilroy-Thin.ttf') format('truetype');
     }
     @font-face {
-        font-family: 'Montserrat Alternates';
-        font-style: normal;
-        font-weight: 200;
-        font-display: swap;
-        src: url('@/fonts/Montserrat_Alternates/MontserratAlternates-ExtraLight.ttf') format('truetype');
-    }
-    @font-face {
-        font-family: 'Montserrat Alternates';
-        font-style: normal;
-        font-weight: 300;
-        font-display: swap;
-        src: url('@/fonts/Montserrat_Alternates/MontserratAlternates-Light.ttf') format('truetype');
-    }
-    @font-face {
-        font-family: 'Montserrat Alternates';
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-        src: url('@/fonts/Montserrat_Alternates/MontserratAlternates-Regular.ttf') format('truetype');
-    }
-    @font-face {
-        font-family: 'Montserrat Alternates';
-        font-style: normal;
-        font-weight: 500;
-        font-display: swap;
-        src: url('@/fonts/Montserrat_Alternates/MontserratAlternates-Medium.ttf') format('truetype');
-    }
-    @font-face {
-        font-family: 'Montserrat Alternates';
-        font-style: normal;
-        font-weight: 600;
-        font-display: swap;
-        src: url('@/fonts/Montserrat_Alternates/MontserratAlternates-SemiBold.ttf') format('truetype');
-    }
-    @font-face {
-        font-family: 'Montserrat Alternates';
-        font-style: normal;
-        font-weight: 700;
-        font-display: swap;
-        src: url('@/fonts/Montserrat_Alternates/MontserratAlternates-Bold.ttf') format('truetype');
-    }
-    @font-face {
-        font-family: 'Montserrat Alternates';
-        font-style: normal;
-        font-weight: 800;
-        font-display: swap;
-        src: url('@/fonts/Montserrat_Alternates/MontserratAlternates-ExtraBold.ttf') format('truetype');
-    }
-    @font-face {
-        font-family: 'Montserrat Alternates';
-        font-style: normal;
-        font-weight: 900;
-        font-display: swap;
-        src: url('@/fonts/Montserrat_Alternates/MontserratAlternates-Black.ttf') format('truetype');
-    }
-    @font-face {
-        font-family: 'Montserrat Alternates';
+        font-family: "Gilroy";
         font-style: italic;
         font-weight: 100;
         font-display: swap;
-        src: url('@/fonts/Montserrat_Alternates/MontserratAlternates-ThinItalic.ttf') format('truetype');
+        src: url('@/fonts/gilroy/Gilroy-ThinItalic.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 200;
+        font-display: swap;
+        src: url('@/fonts/gilroy/Gilroy-UltraLight.ttf') format('truetype');
     }
     @font-face {
-        font-family: 'Montserrat Alternates';
+        font-family: "Gilroy";
         font-style: italic;
         font-weight: 200;
         font-display: swap;
-        src: url('@/fonts/Montserrat_Alternates/MontserratAlternates-ExtraLightItalic.ttf') format('truetype');
+        src: url('@/fonts/gilroy/Gilroy-UltraLightItalic.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 300;
+        font-display: swap;
+        src: url('@/fonts/gilroy/Gilroy-Light.ttf') format('truetype');
     }
     @font-face {
-        font-family: 'Montserrat Alternates';
+        font-family: "Gilroy";
         font-style: italic;
         font-weight: 300;
         font-display: swap;
-        src: url('@/fonts/Montserrat_Alternates/MontserratAlternates-LightItalic.ttf') format('truetype');
+        src: url('@/fonts/gilroy/Gilroy-LightItalic.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('@/fonts/gilroy/Gilroy-Regular.ttf') format('truetype');
     }
     @font-face {
-        font-family: 'Montserrat Alternates';
+        font-family: "Gilroy";
         font-style: italic;
         font-weight: 400;
         font-display: swap;
-        src: url('@/fonts/Montserrat_Alternates/MontserratAlternates-Italic.ttf') format('truetype');
+        src: url('@/fonts/gilroy/Gilroy-RegularItalic.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url('@/fonts/gilroy/Gilroy-Medium.ttf') format('truetype');
     }
     @font-face {
-        font-family: 'Montserrat Alternates';
+        font-family: "Gilroy";
         font-style: italic;
         font-weight: 500;
         font-display: swap;
-        src: url('@/fonts/Montserrat_Alternates/MontserratAlternates-MediumItalic.ttf') format('truetype');
+        src: url('@/fonts/gilroy/Gilroy-MediumItalic.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url('@/fonts/gilroy/Gilroy-SemiBold.ttf') format('truetype');
     }
     @font-face {
-        font-family: 'Montserrat Alternates';
+        font-family: "Gilroy";
         font-style: italic;
         font-weight: 600;
         font-display: swap;
-        src: url('@/fonts/Montserrat_Alternates/MontserratAlternates-SemiBoldItalic.ttf') format('truetype');
+        src: url('@/fonts/gilroy/Gilroy-SemiBoldItalic.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('@/fonts/gilroy/Gilroy-Bold.ttf') format('truetype');
     }
     @font-face {
-        font-family: 'Montserrat Alternates';
+        font-family: "Gilroy";
         font-style: italic;
         font-weight: 700;
         font-display: swap;
-        src: url('@/fonts/Montserrat_Alternates/MontserratAlternates-BoldItalic.ttf') format('truetype');
+        src: url('@/fonts/gilroy/Gilroy-BoldItalic.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 800;
+        font-display: swap;
+        src: url('@/fonts/gilroy/Gilroy-ExtraBold.ttf') format('truetype');
     }
     @font-face {
-        font-family: 'Montserrat Alternates';
+        font-family: "Gilroy";
         font-style: italic;
         font-weight: 800;
         font-display: swap;
-        src: url('@/fonts/Montserrat_Alternates/MontserratAlternates-ExtraBoldItalic.ttf') format('truetype');
+        src: url('@/fonts/gilroy/Gilroy-ExtraBoldItalic.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 900;
+        font-display: swap;
+        src: url('@/fonts/gilroy/Gilroy-Black.ttf') format('truetype');
     }
     @font-face {
-        font-family: 'Montserrat Alternates';
+        font-family: "Gilroy";
         font-style: italic;
         font-weight: 900;
         font-display: swap;
-        src: url('@/fonts/Montserrat_Alternates/MontserratAlternates-BlackItalic.ttf') format('truetype');
+        src: url('@/fonts/gilroy/Gilroy-BlackItalic.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: "Gilroy";
+        font-style: normal;
+        font-weight: 950;
+        font-display: swap;
+        src: url('@/fonts/gilroy/Gilroy-Heavy.ttf') format('truetype');
+    }
+    @font-face {
+        font-family: "Gilroy";
+        font-style: italic;
+        font-weight: 950;
+        font-display: swap;
+        src: url('@/fonts/gilroy/Gilroy-HeavyItalic.ttf') format('truetype');
     }
 }
 
