@@ -4,55 +4,67 @@ namespace Database\Seeders\Traits;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 trait UploadFile
 {
     /**
-     * Dosyayı public dizinine yükler ve yeni adıyla kaydeder.
+     * public içindeki bir dosyayı alır, işleyip storage/public içine kaydeder.
      *
-     * @param  \Illuminate\Http\UploadedFile|string  $file  - Yüklenecek dosya
-     * @param  string|null  $destinationPath  - Hedef dizin (opsiyonel)
-     * @return string - Yeni dosya yolu
+     * @param  \Illuminate\Http\UploadedFile|string  $file
+     * @param  string|null  $destinationPath
+     * @param  int|null  $width
+     * @return string
      */
-    public function uploadFilePublicPath($file, $destinationPath = null)
+    public function uploadFilePublicPath($file, ?string $destinationPath = null, ?int $width = 1600): string
     {
-        // Dosyanın tam yolunu al
-        $filePath = public_path($file);
+        $destinationPath ??= 'uploads';
 
-        // Hedef dizin yoksa, public dizinini kullan
-        $destinationPath ??= 'storage';
+        if (is_string($file)) {
+            $file = ltrim($file, '/');
+            $filePath = public_path($file);
 
-        // Dosya adı ve uzantısını al
-        $fileName = uniqid().'.'.File::extension($file);
+            if (!file_exists($filePath)) {
+                throw new \Exception("Dosya bulunamadı: {$filePath}");
+            }
 
-        // Dosyanın hedef dizin yolunu oluştur
-        $newPath = public_path($fileName);
+            $originalExtension = strtolower(File::extension($file));
+            $isImage = in_array($originalExtension, ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp']);
+            $filename = uniqid();
 
-        // Dosya bir resimse, boyutlandır
-        if (in_array(File::extension($file), ['jpg', 'jpeg', 'png', 'gif'])) {
-            $imageManager = new ImageManager(new Driver);
+            if ($isImage) {
+                $imageManager = new ImageManager(new Driver());
+                $image = $imageManager->read($filePath);
 
-            $image = $imageManager->read($filePath);
+                if ($image->width() > $width) {
+                    $image->scaleDown(width: $width);
+                }
 
-            // Resmi boyutlandır
-            $image->scaleDown(width: 1200);
+                $filename .= '.webp';
+                $newPath = storage_path("app/public/{$destinationPath}/{$filename}");
+                File::ensureDirectoryExists(dirname($newPath));
 
-            // Resmi webp formatına dönüştür
-            $image->save($filePath, 70, 'webp');
+                $image->save($newPath, quality: 80, format: 'webp');
+            } else {
+                $filename .= '.' . $originalExtension;
+                $newPath = storage_path("app/public/{$destinationPath}/{$filename}");
+                File::ensureDirectoryExists(dirname($newPath));
 
-            // Dosya adını güncelle
-            $fileName = pathinfo($fileName, PATHINFO_FILENAME).'.webp';
-            $newPath = public_path($fileName);
+                File::copy($filePath, $newPath);
+            }
+
+            return "storage/{$destinationPath}/{$filename}";
+        }
+        
+        $originalExtension = strtolower($file->getClientOriginalExtension());
+        $filename = uniqid() . '.' . $originalExtension;
+        $stored = $file->storeAs("public/{$destinationPath}", $filename);
+
+        if (!$stored) {
+            throw new \Exception('Dosya yüklenemedi.');
         }
 
-        // Dosyayı kopyala
-        if (Storage::disk('public')->put($fileName, File::get($filePath))) {
-            return $fileName;
-        }
-
-        // Eğer kopyalama başarısız olursa hata döndür
-        throw new \Exception('Dosya kopyalanırken bir hata oluştu.');
+        return str_replace('public/', 'storage/', $stored);
     }
 }

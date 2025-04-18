@@ -3,12 +3,14 @@
 namespace App\Livewire;
 
 use App\Models\Form;
-use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
-use DanHarrin\LivewireRateLimiting\WithRateLimiting;
+use Livewire\Component;
+use App\Mail\ContactMail;
+use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Mail;
 use Filament\Notifications\Notification;
 use Illuminate\Validation\ValidationException;
-use Livewire\Attributes\Validate;
-use Livewire\Component;
+use DanHarrin\LivewireRateLimiting\WithRateLimiting;
+use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 
 class ContactForm extends Component
 {
@@ -28,13 +30,22 @@ class ContactForm extends Component
 
     public ?string $classes = null;
 
+    public ?string $title = null;
+    public ?string $subtitle = null;
+
+    public function mount($title, $subtitle)
+    {
+        $this->title = $title;
+        $this->subtitle = $subtitle;
+    }
+
     public function save()
     {
         try {
             $this->rateLimit(maxAttempts: 2, decaySeconds: 10);
         } catch (TooManyRequestsException $exception) {
             Notification::make()
-                ->title('Bodyguard geldi!')
+                ->title('Uyarı!')
                 ->body('Formu çok fazla gönderiyorsunuz. Lütfen biraz bekleyin.')
                 ->warning()
                 ->send();
@@ -66,15 +77,20 @@ class ContactForm extends Component
 
         Form::create(array_merge($this->formEls(), $extraData));
 
+        $recipients = [
+            // 'ccmail@example.com',
+        ];
+
+        Mail::to('kt@kaantanis.com')
+            ->cc($recipients)
+            ->send(new ContactMail($this->name, $this->phone, $this->message));
+
         Notification::make()
-            ->title('Başarılı!')
-            ->body('Form başarıyla gönderildi.')
+            ->body('Mesajınız başarıyla iletildi')
             ->success()
             ->send();
 
         $this->reset();
-
-        $this->dispatch('contact-form:submitted');
     }
 
     public function formEls()
