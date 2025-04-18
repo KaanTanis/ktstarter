@@ -8,6 +8,6 @@ $filamentPaths = collect(filament()->getPanels())->map(fn ($panel) => ltrim($pan
 
 Livewire::setUpdateRoute(fn ($handle) => Route::post('/livewire/update', $handle));
 
-Route::get('{?slug}', PageController::class)->where([
+Route::get('{filamentFabricatorPage?}', PageController::class)->where([
     'page' => "^(?!.$filamentPaths|filament|pulse).*$",
 ])->name('page');

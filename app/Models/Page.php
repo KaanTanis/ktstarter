@@ -53,7 +53,11 @@ class Page extends BasePage implements Viewable
 
     public function getUrlAttribute(): false|string
     {
-        return getLocalizedUrl(url: $this->slug);
+        return $this->slug
+            ? route('page', [
+                'filamentFabricatorPage' => $this->slug,
+            ])
+            : false;
     }
 
     public static function findBySlug(string $slug)

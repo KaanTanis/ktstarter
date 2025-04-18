@@ -3,6 +3,7 @@
 namespace App\Filament\Fabricator\PageBlocks;
 
 use Filament\Forms\Components\Builder\Block;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Z3d0X\FilamentFabricator\PageBlocks\PageBlock;
 
@@ -13,7 +14,7 @@ class TextBlock extends PageBlock
         return Block::make('text')
             ->label('Metin')
             ->schema([
-                Textarea::make('text')
+                RichEditor::make('text')
                     ->label('Metin'),
             ]);
     }

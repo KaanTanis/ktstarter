@@ -14,16 +14,16 @@ class PageController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(?Page $page)
+    public function __invoke(?Page $filamentFabricatorPage = null)
     {
-        if ($page === null) {
-            $page = Page::findBySlug('/');
+        if ($filamentFabricatorPage === null) {
+            $filamentFabricatorPage = Page::where('slug->'.app()->getLocale(), '/')->first();
         }
 
-        $this->loadSEO(new PageSEO($page));
+        $this->loadSEO(new PageSEO($filamentFabricatorPage));
 
-        // views($page)->cooldown(now()->addHours(6))->record();
-
-        return $page->render();
+        views($filamentFabricatorPage)->cooldown(now()->addHours(6))->record();
+        
+        return $filamentFabricatorPage->render();
     }
 }

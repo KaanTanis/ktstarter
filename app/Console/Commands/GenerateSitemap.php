@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Blog;
 use App\Models\Page;
+use App\Models\Project;
 use App\Models\Tag;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
@@ -32,49 +33,29 @@ class GenerateSitemap extends Command
      */
     public function handle()
     {
-        $lastBlogChangeTime = Blog::max('updated_at');
-        $homeLastChange = Page::where('type', 'home')->first()->updated_at;
-        $aboutLastChange = Page::where('type', 'about')->first()->updated_at;
+        $homeLastChange = Page::where('slug->'.app()->getLocale(), '/')->first()->updated_at;
+        $homeUrl = Page::where('slug->'.app()->getLocale(), '/')->first()->url;
 
         $sitemap = Sitemap::create()
-            ->add(Url::create(route('home'))
+            ->add(Url::create($homeUrl)
                 ->setPriority(1)
                 ->setLastModificationDate(Carbon::parse($homeLastChange))
-                ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY))
-            ->add(Url::create(route('blogs'))
-                ->setPriority(0.8)
-                ->setLastModificationDate(Carbon::parse($lastBlogChangeTime))
-                ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY))
-            ->add(Url::create(route('about'))
-                ->setPriority(0.5)
-                ->setLastModificationDate(Carbon::parse($aboutLastChange))
-                ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY));
+                ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY));
 
-        Blog::chunk(100, function ($blogs) use ($sitemap) {
-            foreach ($blogs as $blog) {
-                $url = Url::create(route('blog', $blog->slug))
-                    ->setLastModificationDate($blog->updated_at)
-                    ->setPriority(0.9)
-                    ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY);
+            // Project::chunk(100, function ($projects) use ($sitemap) {
+            //     foreach ($projects as $project) {
+            //         $url = Url::create(route('project', $project->slug))
+            //             ->setLastModificationDate($project->updated_at)
+            //             ->setPriority(0.9)
+            //             ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY);
 
-                if ($blog->cover) {
-                    $url->addImage(Storage::url($blog->cover));
-                }
+            //         if ($project->cover_2) {
+            //             $url->addImage(Storage::url($project->cover_2));
+            //         }
 
-                $sitemap->add($url);
-            }
-        });
-
-        Tag::chunk(100, function ($tags) use ($sitemap) {
-            foreach ($tags as $tag) {
-                $url = Url::create(route('blogs', ['selectedTag' => $tag->slug]))
-                    ->setLastModificationDate($tag->updated_at)
-                    ->setPriority(0.6)
-                    ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY);
-
-                $sitemap->add($url);
-            }
-        });
+            //         $sitemap->add($url);
+            //     }
+            // });
 
         $sitemap->writeToFile(public_path('sitemap.xml'));
     }

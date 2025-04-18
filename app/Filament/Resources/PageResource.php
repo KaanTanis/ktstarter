@@ -2,33 +2,34 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PageResource\Pages;
 use Closure;
-use Filament\Forms\Components\Actions\Action as FormAction;
-use Filament\Forms\Components\Group;
-use Filament\Forms\Components\Hidden;
-use Filament\Forms\Components\Placeholder;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
-use Filament\Resources\Concerns\Translatable;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Illuminate\Support\Str;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\Action;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Textarea;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Unique;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\Placeholder;
+use Filament\Resources\Concerns\Translatable;
+use App\Filament\Resources\PageResource\Pages;
+use Z3d0X\FilamentFabricator\View\ResourceSchemaSlot;
 use Z3d0X\FilamentFabricator\Facades\FilamentFabricator;
 use Z3d0X\FilamentFabricator\Forms\Components\PageBuilder;
+use Filament\Forms\Components\Actions\Action as FormAction;
 use Z3d0X\FilamentFabricator\Models\Contracts\Page as PageContract;
-use Z3d0X\FilamentFabricator\View\ResourceSchemaSlot;
 
 class PageResource extends Resource
 {
@@ -131,6 +132,15 @@ class PageResource extends Resource
                                             }
                                         }
                                     ),
+
+                                TextInput::make('seo_title')
+                                    ->label('Seo Başlık')
+                                    ->maxLength(70),
+
+                                Textarea::make('seo_description')
+                                    ->label('Seo Açıklama')
+                                    ->maxLength(160)
+                                    ->rows(3),
                             ]),
 
                         Group::make()->schema(FilamentFabricator::getSchemaSlot(ResourceSchemaSlot::SIDEBAR_AFTER)),

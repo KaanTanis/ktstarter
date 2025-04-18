@@ -13,11 +13,11 @@ class PageSEO implements SEOFriendly
 
     public function loadSEO(SEOTools $seoTools)
     {
-        $title = data_get($this->page, 'data.seo.seo_title')
-            ?? Setting::getValueByKey('site_title')
-            ?? Setting::getValueByKey('seo_title');
-        $description = data_get($this->page, 'data.seo.seo_description')
-            ?? Setting::getValueByKey('seo_description');
+        $title = data_get($this->page, 'seo_title')
+            ?? Setting::getValueByKey('title');
+
+        $description = data_get($this->page, 'seo_description')
+            ?? null;
 
         // Genel Meta Etiketler
         $seoTools->setTitle($title)

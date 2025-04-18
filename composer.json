@@ -8,9 +8,13 @@
     ],
     "license": "MIT",
     "repositories": [
-        
+        {
+            "type": "git",
+            "url": "https://github.com/KaanTanis/filament-simple-webp.git"
+        }
     ],
     "require": {
+        "kaantanis/filament-simple-webp": "@dev",
         "php": "^8.2",
         "artesaos/seotools": "^1.3",
         "awcodes/filament-tiptap-editor": "^3.4",
