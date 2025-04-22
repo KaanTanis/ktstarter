@@ -51,7 +51,7 @@ trait UploadFile
                 File::copy($filePath, $newPath);
             }
 
-            return "storage/{$destinationPath}/{$filename}";
+            return "{$destinationPath}/{$filename}";
         }
 
         $originalExtension = strtolower($file->getClientOriginalExtension());

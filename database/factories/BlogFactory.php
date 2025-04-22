@@ -20,13 +20,28 @@ class BlogFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $title = $this->faker->sentence,
-            'slug' => str()->slug($title),
-            'content' => $this->faker->paragraphs(5, true),
-            'cover' => $this->uploadFilePublicPath('assets/img/blog.jpg'),
+            'title' => [
+                'tr' => $this->faker->sentence,
+                'en' => $this->faker->sentence,
+            ],
+            'slug' => [
+                'tr' => $this->faker->slug,
+                'en' => $this->faker->slug,
+            ],
+            'content' => [
+                'tr' => $this->faker->paragraphs(3, true),
+                'en' => $this->faker->paragraphs(3, true),
+            ],
+            'cover' => $this->uploadFilePublicPath('assets/img/blog.jpg', 'blogs'),
             'published_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
-            'seo_title' => $this->faker->sentence,
-            'seo_description' => $this->faker->paragraph,
+            'seo_title' => [
+                'tr' => $this->faker->sentence,
+                'en' => $this->faker->sentence,
+            ],
+            'seo_description' => [
+                'tr' => $this->faker->paragraph,
+                'en' => $this->faker->paragraph,
+            ]
         ];
     }
 }

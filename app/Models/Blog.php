@@ -9,12 +9,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Spatie\Translatable\HasTranslations;
 
 class Blog extends Model implements Viewable
 {
     use HasFactory;
     use HasSlug;
     use InteractsWithViews;
+    use HasTranslations;
+
+    public $translatable = ['title', 'slug', 'content', 'seo_title', 'seo_description'];
 
     protected $guarded = [];
 
@@ -31,20 +35,12 @@ class Blog extends Model implements Viewable
             ->saveSlugsTo('slug');
     }
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
     public function summary($limit = 200)
     {
-        // remove html tags
         $string = strip_tags($this->content);
 
-        // truncate string
         $stringCut = substr($string, 0, $limit);
 
-        // make sure it ends in a word so assassinate doesn
         $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'...';
 
         return $string;

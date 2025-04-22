@@ -3,28 +3,29 @@
 namespace App\Filament\Pages;
 
 use App\Models\Setting;
+use Filament\Forms\Form;
+use Filament\Pages\Page;
 use Filament\Actions\Action;
-use Filament\Forms\ComponentContainer;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
+use Illuminate\Support\Facades\Cache;
+use Filament\Forms\ComponentContainer;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
 use Filament\Notifications\Notification;
-use Filament\Pages\Page;
-use Illuminate\Support\Facades\Cache;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Concerns\InteractsWithForms;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 
 /**
  * @property ComponentContainer $form
  */
 class Settings extends Page implements HasForms
 {
-    use InteractsWithForms;
+    use InteractsWithForms, HasPageShield;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
@@ -61,17 +62,10 @@ class Settings extends Page implements HasForms
                     ->tabs([
                         Tab::make(__('Site Ayarları'))
                             ->schema([
-                                Toggle::make('site_status')
-                                    ->label(__('Site Durumu')),
-                                TextInput::make('site_status_description')
-                                    ->label(__('Site Durum Açıklaması')),
-                            ]),
-
-                        Tab::make('Gizlilik Politikası')
-                            ->schema([
-                                RichEditor::make('privacy_policy')
-                                    ->label(__('Gizlilik Politikası'))
-                                    ->columnSpan(2),
+                                Toggle::make('maintenance_mode')
+                                    ->label(__('Bakım Modu')),
+                                TextInput::make('maintenance_message')
+                                    ->label(__('Bakım Modu Mesajı')),
                             ]),
 
                         Tab::make('Çerez Bildirisi')

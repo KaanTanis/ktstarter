@@ -5,9 +5,10 @@ namespace App\Http\Middleware;
 use App\Models\Setting;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class SiteStatusMiddleware
+class MaintenanceMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,11 +17,9 @@ class SiteStatusMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $status = Setting::getValueByKey('site_status');
-
-        if (! $status) {
-            if (! auth()->check()) {
-                return abort(503);
+        if ((bool) Setting::getValueByKey('maintenance_mode')) {
+            if (! Auth::check()) {
+                abort(503);
             }
         }
 

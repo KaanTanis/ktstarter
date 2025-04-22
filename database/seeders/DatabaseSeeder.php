@@ -23,13 +23,8 @@ class DatabaseSeeder extends Seeder
             $this->command->info("\tStorage cleared.");
         }
 
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'kt@kaantanis.com',
-            'password' => bcrypt('123123123'),
-        ]);
-
         $this->call([
+            AdminSeeder::class,
             SettingSeeder::class,
             TagSeeder::class,
             BlogSeeder::class,

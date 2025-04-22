@@ -50,6 +50,7 @@ class AdminPanelProvider extends PanelProvider
                 FilamentFabricatorPlugin::make(),
                 SpatieLaravelTranslatablePlugin::make()
                     ->defaultLocales(['tr', 'en']),
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
             ])
             ->middleware([
                 EncryptCookies::class,

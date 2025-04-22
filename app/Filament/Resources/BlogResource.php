@@ -21,9 +21,12 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
+use Filament\Resources\Concerns\Translatable;
 
 class BlogResource extends Resource
 {
+    use Translatable;
+
     protected static ?string $model = Blog::class;
 
     protected static ?string $navigationIcon = null;
