@@ -15,6 +15,8 @@ return new class extends Migration
             $table->string('layout')->default('default')->index();
             $table->json('blocks');
             $table->foreignId('parent_id')->nullable()->constrained(config('filament-fabricator.table_name', 'pages'))->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('seo_title')->nullable()->after('title');
+            $table->string('seo_description')->nullable()->after('seo_title');
             $table->timestamps();
         });
     }

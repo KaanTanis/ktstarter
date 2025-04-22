@@ -20,7 +20,7 @@ class Page extends BasePage implements Viewable
     use HasTranslations;
     use InteractsWithViews;
 
-    public $translatable = ['title', 'slug', 'blocks'];
+    public $translatable = ['title', 'slug', 'blocks', 'seo_title', 'seo_description'];
 
     public function render(): string
     {
