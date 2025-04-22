@@ -166,3 +166,19 @@ html {
 ::-webkit-scrollbar-thumb:hover {
     @apply bg-error
 }
+
+:where(.menu li:not(.menu-title, .disabled) > *:not(ul, details, .menu-title, .btn)),
+:where(.menu li:not(.menu-title, .disabled) > details > summary:not(.menu-title, .btn)) {
+    @apply transition-colors duration-200 ease-out;
+    &:not(.active):focus,
+    &:not(.active):focus-visible,
+    &:not(.active):hover {
+            @apply bg-transparent text-current font-bold;
+    }
+}
+
+.menu li > *:not(ul, .menu-title, details, .btn):active,
+.menu li > *:not(ul, .menu-title, details, .btn).active,
+.menu li > details > summary:active {
+    @apply bg-transparent text-current font-bold transition-colors duration-200 ease-out;
+}

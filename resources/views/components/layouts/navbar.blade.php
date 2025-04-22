@@ -9,7 +9,7 @@
                 </a>
             </div>
             <div class="hidden xl:block">
-                <ul class="menu lg:menu-horizontal rounded-box navMenu [&>li>*]:text-base [&>li>*]:font-semibold text-base-content/80 [&>li>a]:transition-all navMenu">
+                <ul class="menu lg:menu-horizontal rounded-box navMenu [&>li>*]:text-base [&>li>*]:font-semibold text-base-content/80 navMenu">
                     <x-menu />
                 </ul>
             </div>
