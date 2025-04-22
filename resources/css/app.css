@@ -169,7 +169,7 @@ html {
 
 :where(.menu li:not(.menu-title, .disabled) > *:not(ul, details, .menu-title, .btn)),
 :where(.menu li:not(.menu-title, .disabled) > details > summary:not(.menu-title, .btn)) {
-    @apply transition-colors duration-200 ease-out;
+    @apply transition-all;
     &:not(.active):focus,
     &:not(.active):focus-visible,
     &:not(.active):hover {
@@ -180,5 +180,5 @@ html {
 .menu li > *:not(ul, .menu-title, details, .btn):active,
 .menu li > *:not(ul, .menu-title, details, .btn).active,
 .menu li > details > summary:active {
-    @apply bg-transparent text-current font-bold transition-colors duration-200 ease-out;
+    @apply bg-transparent text-current font-bold transition-all;
 }
