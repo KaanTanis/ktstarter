@@ -19,6 +19,10 @@ use Filament\Notifications\Notification;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Concerns\InteractsWithForms;
 use BezhanSalleh\FilamentShield\Traits\HasPageShield;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Textarea;
 
 /**
  * @property ComponentContainer $form
@@ -60,12 +64,48 @@ class Settings extends Page implements HasForms
             ->schema([
                 Tabs::make('tabs')
                     ->tabs([
-                        Tab::make(__('Site Ayarları'))
+                        Tab::make('Genel Ayarları')
                             ->schema([
                                 Toggle::make('maintenance_mode')
-                                    ->label(__('Bakım Modu')),
-                                TextInput::make('maintenance_message')
-                                    ->label(__('Bakım Modu Mesajı')),
+                                    ->label('Bakım Modu'),
+                                Textarea::make('maintenance_message')
+                                    ->label('Bakım Modu Mesajı'),
+
+                                Grid::make(3)
+                                    ->schema([
+                                        FileUpload::make('site_logo')
+                                            ->label('Site Logosu')
+                                            ->image()
+                                            ->webp(),
+
+                                        FileUpload::make('site_logo_dark')
+                                            ->label('Site Logosu (Karanlık)')
+                                            ->image()
+                                            ->webp(),
+
+                                        FileUpload::make('favicon')
+                                            ->label('Favicon')
+                                            ->image()
+                                            ->webp(),
+                                    ]),
+
+                                    Grid::make(2)
+                                        ->schema([
+                                            TextInput::make('email')
+                                                ->label('İletişim E-Postası')
+                                                ->email(),
+                                            TextInput::make('phone')
+                                                ->label('İletişim Telefonu')
+                                                ->tel(),
+                                            TextInput::make('address')
+                                                ->label('İletişim Adresi'),
+                                            TextInput::make('site_title')
+                                                ->label('Site Başlığı'),
+                                            TextInput::make('site_description')
+                                                ->label('Site Açıklaması'),
+                                            TextInput::make('copyright_text')
+                                                ->label('Telif Hakkı Yazısı'),
+                                        ])
                             ]),
 
                         Tab::make('Çerez Bildirisi')
