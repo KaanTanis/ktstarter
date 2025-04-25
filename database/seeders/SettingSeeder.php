@@ -67,7 +67,7 @@ class SettingSeeder extends Seeder
                     <p>Çerezler ve kişisel verilerle ilgili sorularınız için bizimle iletişime geçebilirsiniz:</p>
                     <p><strong>E-posta:</strong> [email@adres.com]</p>')->squish()->value()),
                 'data_type' => 'string',
-            ]
+            ],
         ]);
     }
 }

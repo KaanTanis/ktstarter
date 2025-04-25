@@ -4,8 +4,8 @@ namespace App\Filament\Resources\BlogResource\Pages;
 
 use App\Filament\Resources\BlogResource;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord\Concerns\Translatable;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\EditRecord\Concerns\Translatable;
 
 class EditBlog extends EditRecord
 {

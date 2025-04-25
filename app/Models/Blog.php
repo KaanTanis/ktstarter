@@ -15,8 +15,8 @@ class Blog extends Model implements Viewable
 {
     use HasFactory;
     use HasSlug;
-    use InteractsWithViews;
     use HasTranslations;
+    use InteractsWithViews;
 
     public $translatable = ['title', 'slug', 'content', 'seo_title', 'seo_description'];
 

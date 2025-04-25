@@ -41,7 +41,7 @@ class BlogFactory extends Factory
             'seo_description' => [
                 'tr' => $this->faker->paragraph,
                 'en' => $this->faker->paragraph,
-            ]
+            ],
         ];
     }
 }

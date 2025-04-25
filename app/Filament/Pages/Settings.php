@@ -3,33 +3,32 @@
 namespace App\Filament\Pages;
 
 use App\Models\Setting;
-use Filament\Forms\Form;
-use Filament\Pages\Page;
-use Filament\Actions\Action;
-use Filament\Forms\Components\Tabs;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
-use Illuminate\Support\Facades\Cache;
-use Filament\Forms\ComponentContainer;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\Tabs\Tab;
-use Filament\Forms\Components\TextInput;
-use Filament\Notifications\Notification;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Concerns\InteractsWithForms;
 use BezhanSalleh\FilamentShield\Traits\HasPageShield;
+use Filament\Actions\Action;
+use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Form;
+use Filament\Notifications\Notification;
+use Filament\Pages\Page;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * @property ComponentContainer $form
  */
 class Settings extends Page implements HasForms
 {
-    use InteractsWithForms, HasPageShield;
+    use HasPageShield, InteractsWithForms;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
@@ -89,23 +88,23 @@ class Settings extends Page implements HasForms
                                             ->webp(),
                                     ]),
 
-                                    Grid::make(2)
-                                        ->schema([
-                                            TextInput::make('email')
-                                                ->label('İletişim E-Postası')
-                                                ->email(),
-                                            TextInput::make('phone')
-                                                ->label('İletişim Telefonu')
-                                                ->tel(),
-                                            TextInput::make('address')
-                                                ->label('İletişim Adresi'),
-                                            TextInput::make('site_title')
-                                                ->label('Site Başlığı'),
-                                            TextInput::make('site_description')
-                                                ->label('Site Açıklaması'),
-                                            TextInput::make('copyright_text')
-                                                ->label('Telif Hakkı Yazısı'),
-                                        ])
+                                Grid::make(2)
+                                    ->schema([
+                                        TextInput::make('email')
+                                            ->label('İletişim E-Postası')
+                                            ->email(),
+                                        TextInput::make('phone')
+                                            ->label('İletişim Telefonu')
+                                            ->tel(),
+                                        TextInput::make('address')
+                                            ->label('İletişim Adresi'),
+                                        TextInput::make('site_title')
+                                            ->label('Site Başlığı'),
+                                        TextInput::make('site_description')
+                                            ->label('Site Açıklaması'),
+                                        TextInput::make('copyright_text')
+                                            ->label('Telif Hakkı Yazısı'),
+                                    ]),
                             ]),
 
                         Tab::make('Çerez Bildirisi')
