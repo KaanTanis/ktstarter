@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 use Spatie\Permission\Models\Role;
 
 class AdminSeeder extends Seeder
@@ -34,9 +35,17 @@ class AdminSeeder extends Seeder
 
         $admin->assignRole(config('filament-shield.super_admin.name'));
 
-        User::firstOrCreate(['email' => 'admin@mail.com'], [
+        $user = User::firstOrCreate(['email' => 'admin@mail.com'], [
             'name' => 'Admin',
             'password' => bcrypt('12345678'),
         ]);
+
+        $user->assignRole(config('filament-shield.panel_user.name'));
+
+        Artisan::call('shield:generate', [
+            '--panel' => 'admin',
+            '--all' => true,
+        ]);
+        Artisan::call('shield:install admin');
     }
 }

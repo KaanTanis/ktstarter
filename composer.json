@@ -27,6 +27,7 @@
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
+        "mcamara/laravel-localization": "^2.3",
         "mohamedsabil83/filament-forms-tinyeditor": "^2.3",
         "spatie/eloquent-sortable": "^4.4",
         "spatie/laravel-sitemap": "^7.2",
@@ -43,6 +44,9 @@
         "phpunit/phpunit": "^11.0.1"
     },
     "autoload": {
+        "files": [
+            "app/helpers.php"
+        ],
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",

@@ -5,7 +5,7 @@
     ])>@lang('Ana Sayfa')</a>
 </li>
 <li>
-    <a href="#" @class([
+    <a href="{{ getLocalizedUrl(url: App\Models\Page::where('slug->en', 'about-us')->first()->url) }}" @class([
         'hover:text-base-content',
         'text-base-content !font-bold' => false
     ])>@lang('Hakkımızda')</a>
@@ -37,3 +37,5 @@
         'text-base-content !font-bold' => false
     ])>@lang('İletişim')</a>
 </li>
+
+<x-language-switcher />
