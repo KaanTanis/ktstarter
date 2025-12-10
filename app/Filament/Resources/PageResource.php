@@ -157,12 +157,12 @@ class PageResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('url')
-                    ->label(__('filament-fabricator::page-resource.labels.url'))
-                    ->toggleable()
-                    ->getStateUsing(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId($record->id) ?: null)
-                    ->url(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId($record->id) ?: null, true)
-                    ->visible(config('filament-fabricator.routing.enabled')),
+                // TextColumn::make('url')
+                //     ->label(__('filament-fabricator::page-resource.labels.url'))
+                //     ->toggleable()
+                //     ->getStateUsing(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId($record->id) ?: null)
+                //     ->url(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId($record->id) ?: null, true)
+                //     ->visible(config('filament-fabricator.routing.enabled')),
 
                 TextColumn::make('layout')
                     ->label(__('filament-fabricator::page-resource.labels.layout'))
@@ -185,13 +185,13 @@ class PageResource extends Resource
                 ViewAction::make()
                     ->visible(config('filament-fabricator.enable-view-page')),
                 EditAction::make(),
-                Action::make('visit')
-                    ->label(__('filament-fabricator::page-resource.actions.visit'))
-                    ->url(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId($record->id, true) ?: null)
-                    ->icon('heroicon-o-arrow-top-right-on-square')
-                    ->openUrlInNewTab()
-                    ->color('success')
-                    ->visible(config('filament-fabricator.routing.enabled')),
+                // Action::make('visit')
+                //     ->label(__('filament-fabricator::page-resource.actions.visit'))
+                //     ->url(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId($record->id, true) ?: null)
+                //     ->icon('heroicon-o-arrow-top-right-on-square')
+                //     ->openUrlInNewTab()
+                //     ->color('success')
+                //     ->visible(config('filament-fabricator.routing.enabled')),
             ])
             ->toolbarActions([]);
     }

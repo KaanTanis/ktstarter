@@ -24,7 +24,7 @@ use Filament\Pages\Page;
 use Illuminate\Support\Facades\Cache;
 
 /**
- * @property \Filament\Schemas\Schema $form
+ * @property Schema $form
  */
 class Settings extends Page implements HasForms
 {

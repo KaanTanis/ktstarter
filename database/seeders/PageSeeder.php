@@ -13,22 +13,21 @@ class PageSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->createHomePage();
+        $this->createAboutPage();
+    }
+
+    protected function createHomePage()
+    {
         Page::updateOrCreate([
-            'slug->tr' => '/',
-            'slug->en' => '/',
+            'slug' => '/',
         ], [
             'layout' => DefaultLayout::getName(),
-            'title' => [
-                'tr' => 'Ana Sayfa',
-                'en' => 'Home',
-            ],
+            'title' => 'Ana Sayfa',
             'blocks' => [
-                'tr' => $tr = [
-                    $this->createBlock('text', [
-                        'text' => 'lorem ipsum dolor sit amet consectetur adipiscing elit',
-                    ]),
-                ],
-                'en' => $tr,
+                $this->createBlock('text', [
+                    'text' => 'lorem ipsum dolor sit amet consectetur adipiscing elit',
+                ]),
             ],
         ]);
     }
@@ -36,24 +35,19 @@ class PageSeeder extends Seeder
     protected function createAboutPage()
     {
         Page::updateOrCreate([
-            'slug->tr' => '/hakkimizda',
-            'slug->en' => '/about-us',
+            'slug' => 'hakkimizda',
         ], [
             'layout' => DefaultLayout::getName(),
-            'title' => [
-                'tr' => 'Hakkımızda',
-                'en' => 'About Us',
-            ],
+            'title' => 'Hakkımızda',
             'blocks' => [
-                'tr' => $tr = [
-                    $this->createBlock('text', [
-                        'text' => 'lorem ipsum dolor sit amet consectetur adipiscing elit',
-                    ]),
-                ],
-                'en' => $tr,
+                $this->createBlock('text', [
+                    'text' => 'lorem ipsum dolor sit amet consectetur adipiscing elit',
+                ]),
             ],
         ]);
     }
+
+    // [{"type":"text","data":{"text":"<p>test<\/p>"}}]
 
     protected function createBlock(string $name, array $fields)
     {

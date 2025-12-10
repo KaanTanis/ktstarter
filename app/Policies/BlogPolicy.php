@@ -1,108 +1,70 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
-use App\Models\User;
+use Illuminate\Foundation\Auth\User as AuthUser;
 use App\Models\Blog;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BlogPolicy
 {
     use HandlesAuthorization;
-
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
+    
+    public function viewAny(AuthUser $authUser): bool
     {
-        return $user->can('view_any_blog');
+        return $authUser->can('ViewAny:Blog');
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Blog $blog): bool
+    public function view(AuthUser $authUser, Blog $blog): bool
     {
-        return $user->can('view_blog');
+        return $authUser->can('View:Blog');
     }
 
-    /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
+    public function create(AuthUser $authUser): bool
     {
-        return $user->can('create_blog');
+        return $authUser->can('Create:Blog');
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, Blog $blog): bool
+    public function update(AuthUser $authUser, Blog $blog): bool
     {
-        return $user->can('update_blog');
+        return $authUser->can('Update:Blog');
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, Blog $blog): bool
+    public function delete(AuthUser $authUser, Blog $blog): bool
     {
-        return $user->can('delete_blog');
+        return $authUser->can('Delete:Blog');
     }
 
-    /**
-     * Determine whether the user can bulk delete.
-     */
-    public function deleteAny(User $user): bool
+    public function restore(AuthUser $authUser, Blog $blog): bool
     {
-        return $user->can('delete_any_blog');
+        return $authUser->can('Restore:Blog');
     }
 
-    /**
-     * Determine whether the user can permanently delete.
-     */
-    public function forceDelete(User $user, Blog $blog): bool
+    public function forceDelete(AuthUser $authUser, Blog $blog): bool
     {
-        return $user->can('force_delete_blog');
+        return $authUser->can('ForceDelete:Blog');
     }
 
-    /**
-     * Determine whether the user can permanently bulk delete.
-     */
-    public function forceDeleteAny(User $user): bool
+    public function forceDeleteAny(AuthUser $authUser): bool
     {
-        return $user->can('force_delete_any_blog');
+        return $authUser->can('ForceDeleteAny:Blog');
     }
 
-    /**
-     * Determine whether the user can restore.
-     */
-    public function restore(User $user, Blog $blog): bool
+    public function restoreAny(AuthUser $authUser): bool
     {
-        return $user->can('restore_blog');
+        return $authUser->can('RestoreAny:Blog');
     }
 
-    /**
-     * Determine whether the user can bulk restore.
-     */
-    public function restoreAny(User $user): bool
+    public function replicate(AuthUser $authUser, Blog $blog): bool
     {
-        return $user->can('restore_any_blog');
+        return $authUser->can('Replicate:Blog');
     }
 
-    /**
-     * Determine whether the user can replicate.
-     */
-    public function replicate(User $user, Blog $blog): bool
+    public function reorder(AuthUser $authUser): bool
     {
-        return $user->can('replicate_blog');
+        return $authUser->can('Reorder:Blog');
     }
 
-    /**
-     * Determine whether the user can reorder.
-     */
-    public function reorder(User $user): bool
-    {
-        return $user->can('reorder_blog');
-    }
 }

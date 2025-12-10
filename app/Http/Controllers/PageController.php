@@ -17,7 +17,7 @@ class PageController extends Controller
     public function __invoke(?Page $filamentFabricatorPage = null)
     {
         if ($filamentFabricatorPage === null) {
-            $filamentFabricatorPage = Page::where('slug->'.app()->getLocale(), '/')->first();
+            $filamentFabricatorPage = Page::where('slug', '/')->first();
         }
 
         $this->loadSEO(new PageSEO($filamentFabricatorPage));

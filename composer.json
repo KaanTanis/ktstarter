@@ -22,7 +22,7 @@
         "spatie/eloquent-sortable": "^4.4",
         "spatie/laravel-sitemap": "^7.2",
         "spatie/laravel-sluggable": "^3.6",
-        "z3d0x/filament-fabricator": "^2.5"
+        "z3d0x/filament-fabricator": "^3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
