@@ -24,6 +24,6 @@
         "alpinejs": "^3.14.1",
         "gsap": "^3.12.5",
         "prism-themes": "^1.9.0",
-        "prismjs": "^1.29.0"
+        "prismjs": "^1.30.0"
     }
 }
