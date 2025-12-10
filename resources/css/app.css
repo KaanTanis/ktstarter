@@ -164,10 +164,10 @@ html {
     @apply !w-1
 }
 ::-webkit-scrollbar-thumb {
-    @apply bg-warning
+    @apply bg-orange-600
 }
 ::-webkit-scrollbar-thumb:hover {
-    @apply bg-error
+    @apply bg-red-500
 }
 
 :where(.menu li:not(.menu-title, .disabled) > *:not(ul, details, .menu-title, .btn)),
