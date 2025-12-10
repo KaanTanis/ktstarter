@@ -7,6 +7,7 @@ use App\Models\Blog;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -21,7 +22,6 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
-use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 
 class BlogResource extends Resource
 {
@@ -74,7 +74,7 @@ class BlogResource extends Resource
                                             ->required(),
                                     ]),
 
-                                TinyEditor::make('content')
+                                RichEditor::make('content')
                                     ->label('İçerik')
                                     ->required(),
                             ]),

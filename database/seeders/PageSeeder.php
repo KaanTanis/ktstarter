@@ -33,6 +33,28 @@ class PageSeeder extends Seeder
         ]);
     }
 
+    protected function createAboutPage()
+    {
+        Page::updateOrCreate([
+            'slug->tr' => '/hakkimizda',
+            'slug->en' => '/about-us',
+        ], [
+            'layout' => DefaultLayout::getName(),
+            'title' => [
+                'tr' => 'Hakkımızda',
+                'en' => 'About Us',
+            ],
+            'blocks' => [
+                'tr' => $tr = [
+                    $this->createBlock('text', [
+                        'text' => 'lorem ipsum dolor sit amet consectetur adipiscing elit',
+                    ]),
+                ],
+                'en' => $tr,
+            ],
+        ]);
+    }
+
     protected function createBlock(string $name, array $fields)
     {
         return [

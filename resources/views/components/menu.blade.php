@@ -4,12 +4,12 @@
         'text-base-content !font-bold' => true
     ])>@lang('Ana Sayfa')</a>
 </li>
-<li>
+{{-- <li>
     <a href="{{ getLocalizedUrl(url: App\Models\Page::where('slug->en', 'about-us')->first()->url) }}" @class([
         'hover:text-base-content',
         'text-base-content !font-bold' => false
     ])>@lang('Hakkımızda')</a>
-</li>
+</li> --}}
 <li>
     <details>
     <summary @class([
