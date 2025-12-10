@@ -2,20 +2,25 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Actions\EditAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use App\Filament\Resources\BlogResource\Pages\ListBlogs;
+use App\Filament\Resources\BlogResource\Pages\CreateBlog;
+use App\Filament\Resources\BlogResource\Pages\EditBlog;
 use App\Filament\Resources\BlogResource\Pages;
 use App\Models\Blog;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
-use Filament\Forms\Get;
-use Filament\Forms\Set;
-use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
@@ -25,22 +30,20 @@ use Illuminate\Support\Str;
 
 class BlogResource extends Resource
 {
-    use Translatable;
-
     protected static ?string $model = Blog::class;
 
-    protected static ?string $navigationIcon = null;
+    protected static string | \BackedEnum | null $navigationIcon = null;
 
     protected static ?string $modelLabel = 'Blog';
 
     protected static ?string $pluralModelLabel = 'Bloglar';
 
-    protected static ?string $navigationGroup = 'CMS';
+    protected static string | \UnitEnum | null $navigationGroup = 'CMS';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Grid::make(3)
                     ->schema([
                         Section::make('İçerik')
@@ -133,12 +136,12 @@ class BlogResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -153,9 +156,9 @@ class BlogResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBlogs::route('/'),
-            'create' => Pages\CreateBlog::route('/create'),
-            'edit' => Pages\EditBlog::route('/{record}/edit'),
+            'index' => ListBlogs::route('/'),
+            'create' => CreateBlog::route('/create'),
+            'edit' => EditBlog::route('/{record}/edit'),
         ];
     }
 }

@@ -2,24 +2,25 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Actions\Action;
+use Filament\Actions\ViewAction;
+use Filament\Actions\EditAction;
+use App\Filament\Resources\PageResource\Pages\ListPages;
+use App\Filament\Resources\PageResource\Pages\CreatePage;
+use App\Filament\Resources\PageResource\Pages\EditPage;
 use App\Filament\Resources\PageResource\Pages;
 use Closure;
-use Filament\Forms\Components\Actions\Action as FormAction;
-use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Placeholder;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
-use Filament\Forms\Get;
-use Filament\Forms\Set;
-use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -33,8 +34,6 @@ use Z3d0X\FilamentFabricator\View\ResourceSchemaSlot;
 
 class PageResource extends Resource
 {
-    use Translatable;
-
     protected static ?int $navigationSort = 1;
 
     public static function getLabel(): ?string
@@ -47,11 +46,11 @@ class PageResource extends Resource
         return 'CMS';
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->columns(3)
-            ->schema([
+            ->components([
                 Group::make()
                     ->schema([
                         Group::make()->schema(FilamentFabricator::getSchemaSlot(ResourceSchemaSlot::BLOCKS_BEFORE)),
@@ -117,7 +116,7 @@ class PageResource extends Resource
                                     ->preload()
                                     ->reactive()
                                     ->suffixAction(
-                                        fn ($get, $context) => FormAction::make($context.'-parent')
+                                        fn ($get, $context) => Action::make($context.'-parent')
                                             ->icon('heroicon-o-arrow-top-right-on-square')
                                             ->url(fn () => PageResource::getUrl($context, ['record' => $get('parent_id')]))
                                             ->openUrlInNewTab()
@@ -182,7 +181,7 @@ class PageResource extends Resource
                     ->label(__('filament-fabricator::page-resource.labels.layout'))
                     ->options(FilamentFabricator::getLayouts()),
             ])
-            ->actions([
+            ->recordActions([
                 ViewAction::make()
                     ->visible(config('filament-fabricator.enable-view-page')),
                 EditAction::make(),
@@ -194,7 +193,7 @@ class PageResource extends Resource
                     ->color('success')
                     ->visible(config('filament-fabricator.routing.enabled')),
             ])
-            ->bulkActions([]);
+            ->toolbarActions([]);
     }
 
     public static function getRelations(): array
@@ -207,9 +206,9 @@ class PageResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPages::route('/'),
-            'create' => Pages\CreatePage::route('/create'),
-            'edit' => Pages\EditPage::route('/{record}/edit'),
+            'index' => ListPages::route('/'),
+            'create' => CreatePage::route('/create'),
+            'edit' => EditPage::route('/{record}/edit'),
         ];
     }
 }

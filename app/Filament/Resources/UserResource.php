@@ -2,12 +2,19 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Schemas\Schema;
+use App\Filament\Resources\UserResource\Pages\CreateUser;
+use Filament\Forms\Components\Select;
+use Filament\Actions\EditAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use App\Filament\Resources\UserResource\Pages\ListUsers;
+use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Filament\Actions\GeneratePasswordAction;
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -19,18 +26,18 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-users';
 
-    protected static ?string $navigationGroup = 'Ayarlar';
+    protected static string | \UnitEnum | null $navigationGroup = 'Ayarlar';
 
     protected static ?string $modelLabel = 'Kullanıcı';
 
     protected static ?string $pluralModelLabel = 'Kullanıcılar';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 TextInput::make('name')
                     ->label('İsim')
                     ->required()
@@ -42,10 +49,10 @@ class UserResource extends Resource
                     ->maxLength(255)
                     ->unique(ignoreRecord: true),
 
-                Forms\Components\TextInput::make('password')
+                TextInput::make('password')
                     ->label('Parola')
                     ->password()
-                    ->required(fn ($livewire) => $livewire instanceof Pages\CreateUser)
+                    ->required(fn ($livewire) => $livewire instanceof CreateUser)
                     ->maxLength(255)
                     ->dehydrated(fn ($state) => filled($state))
                     ->confirmed()
@@ -55,10 +62,10 @@ class UserResource extends Resource
                     ->afterStateHydrated(fn ($component) => $component->state(null))
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->autocomplete(false),
-                Forms\Components\TextInput::make('password_confirmation')
+                TextInput::make('password_confirmation')
                     ->label('Parola Tekrar')
                     ->password()
-                    ->required(fn ($livewire) => $livewire instanceof Pages\CreateUser)
+                    ->required(fn ($livewire) => $livewire instanceof CreateUser)
                     ->maxLength(255)
                     ->password()
                     ->minLength(8)
@@ -66,7 +73,7 @@ class UserResource extends Resource
                     ->dehydrated(false)
                     ->autocomplete(false),
 
-                Forms\Components\Select::make('roles')
+                Select::make('roles')
                     ->multiple()
                     ->label('Rol')
                     ->relationship('roles', 'name')
@@ -98,12 +105,12 @@ class UserResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -118,9 +125,9 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'index' => ListUsers::route('/'),
+            'create' => CreateUser::route('/create'),
+            'edit' => EditUser::route('/{record}/edit'),
         ];
     }
 }

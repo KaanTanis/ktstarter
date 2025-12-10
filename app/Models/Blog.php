@@ -9,16 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
-use Spatie\Translatable\HasTranslations;
 
 class Blog extends Model implements Viewable
 {
     use HasFactory;
     use HasSlug;
-    use HasTranslations;
     use InteractsWithViews;
-
-    public $translatable = ['title', 'slug', 'content', 'seo_title', 'seo_description'];
 
     protected $guarded = [];
 

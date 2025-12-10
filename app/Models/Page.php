@@ -7,7 +7,6 @@ use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Support\Facades\Blade;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
-use Spatie\Translatable\HasTranslations;
 use Z3d0X\FilamentFabricator\Facades\FilamentFabricator;
 use Z3d0X\FilamentFabricator\Models\Page as BasePage;
 
@@ -17,10 +16,7 @@ use Z3d0X\FilamentFabricator\Models\Page as BasePage;
 class Page extends BasePage implements Viewable
 {
     use HasSlug;
-    use HasTranslations;
     use InteractsWithViews;
-
-    public $translatable = ['title', 'slug', 'blocks', 'seo_title', 'seo_description'];
 
     public function render(): string
     {
