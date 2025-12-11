@@ -16,10 +16,10 @@ use App\Filament\Resources\PageResource\Pages\EditPage;
 use App\Filament\Resources\PageResource\Pages;
 use Closure;
 use Filament\Forms\Components\Hidden;
-use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -69,16 +69,16 @@ class PageResource extends Resource
 
                         Section::make()
                             ->schema([
-                                Placeholder::make('page_url')
+                                TextEntry::make('page_url')
                                     ->label(__('filament-fabricator::page-resource.labels.url'))
                                     ->visible(fn (?PageContract $record) => config('filament-fabricator.routing.enabled') && filled($record))
-                                    ->content(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId($record?->id)),
+                                    ->state(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId($record?->id)),
 
                                 TextInput::make('title')
                                     ->label(__('filament-fabricator::page-resource.labels.title'))
-                                    ->afterStateUpdated(function (Get $get, Set $set, ?string $state, ?PageContract $record) {
+                                    ->afterStateUpdated(function (Get $get, Set $set, $state, ?PageContract $record) {
                                         if (! $get('is_slug_changed_manually') && filled($state) && blank($record)) {
-                                            $set('slug', Str::slug($state, language: config('app.locale', 'en')));
+                                            $set('slug', Str::slug($state, language: config('app.locale', 'en'))); // @fixme
                                         }
                                     })
                                     ->debounce('500ms')
@@ -157,12 +157,12 @@ class PageResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                // TextColumn::make('url')
-                //     ->label(__('filament-fabricator::page-resource.labels.url'))
-                //     ->toggleable()
-                //     ->getStateUsing(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId($record->id) ?: null)
-                //     ->url(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId($record->id) ?: null, true)
-                //     ->visible(config('filament-fabricator.routing.enabled')),
+                TextColumn::make('url')
+                    ->label(__('filament-fabricator::page-resource.labels.url'))
+                    ->toggleable()
+                    ->getStateUsing(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId((int)$record->id) ?: null)
+                    ->url(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId((int)$record->id) ?: null, true)
+                    ->visible(config('filament-fabricator.routing.enabled')),
 
                 TextColumn::make('layout')
                     ->label(__('filament-fabricator::page-resource.labels.layout'))
@@ -185,13 +185,13 @@ class PageResource extends Resource
                 ViewAction::make()
                     ->visible(config('filament-fabricator.enable-view-page')),
                 EditAction::make(),
-                // Action::make('visit')
-                //     ->label(__('filament-fabricator::page-resource.actions.visit'))
-                //     ->url(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId($record->id, true) ?: null)
-                //     ->icon('heroicon-o-arrow-top-right-on-square')
-                //     ->openUrlInNewTab()
-                //     ->color('success')
-                //     ->visible(config('filament-fabricator.routing.enabled')),
+                Action::make('visit')
+                    ->label(__('filament-fabricator::page-resource.actions.visit'))
+                    ->url(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId((int)$record->id) ?: null)
+                    ->icon('heroicon-o-arrow-top-right-on-square')
+                    ->openUrlInNewTab()
+                    ->color('success')
+                    ->visible(config('filament-fabricator.routing.enabled')),
             ])
             ->toolbarActions([]);
     }
