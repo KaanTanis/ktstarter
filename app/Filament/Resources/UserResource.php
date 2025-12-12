@@ -13,6 +13,7 @@ use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Filament\Actions\GeneratePasswordAction;
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
+use Filament\Actions\DeleteAction;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
@@ -107,6 +108,7 @@ class UserResource extends Resource
             ])
             ->recordActions([
                 EditAction::make(),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

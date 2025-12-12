@@ -40,80 +40,79 @@ class BlogResource extends Resource
 
     protected static string | \UnitEnum | null $navigationGroup = 'CMS';
 
+    protected static bool $shouldRegisterNavigation = true;
+
     public static function form(Schema $schema): Schema
     {
         return $schema
+            ->columns(3)
             ->components([
-                Grid::make(3)
+                Section::make('İçerik')
+                    ->columnSpan(2)
                     ->schema([
-                        Section::make('İçerik')
-                            ->columnSpan(2)
-                            ->schema([
-                                TextInput::make('title')
-                                    ->label('Başlık')
-                                    ->live(onBlur: true)
-                                    ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
-                                        if (($get('slug') ?? '') !== Str::slug($old)) {
-                                            return;
-                                        }
+                        TextInput::make('title')
+                            ->label('Başlık')
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
+                                if (($get('slug') ?? '') !== Str::slug($old)) {
+                                    return;
+                                }
 
-                                        $set('slug', Str::slug($state));
-                                    })
-                                    ->required(),
+                                $set('slug', Str::slug($state));
+                            })
+                            ->required(),
 
-                                TextInput::make('slug')
-                                    ->label('URL')
-                                    ->required(),
+                        TextInput::make('slug')
+                            ->label('URL')
+                            ->required(),
 
-                                Select::make('tags')
-                                    ->label('Etiketler')
-                                    ->relationship(titleAttribute: 'name')
-                                    ->multiple()
-                                    ->preload()
-                                    ->required()
-                                    ->createOptionForm([
-                                        TextInput::make('name')
-                                            ->label('Kategori Adı')
-                                            ->required(),
-                                    ]),
-
-                                RichEditor::make('content')
-                                    ->label('İçerik')
+                        Select::make('tags')
+                            ->label('Etiketler')
+                            ->relationship(titleAttribute: 'name')
+                            ->multiple()
+                            ->preload()
+                            ->createOptionForm([
+                                TextInput::make('name')
+                                    ->label('Kategori Adı')
                                     ->required(),
                             ]),
 
-                        Section::make('SEO & Görsel')
-                            ->columnSpan(1)
-                            ->schema([
-                                FileUpload::make('cover')
-                                    ->label('Kapak Fotoğrafı')
-                                    ->image()
-                                    ->imageEditor()
-                                    ->required()
-                                    ->imageEditorAspectRatios([
-                                        null,
-                                        '4:3',
-                                    ]),
+                        RichEditor::make('content')
+                            ->label('İçerik')
+                            ->required(),
+                    ]),
 
-                                FileUpload::make('banner')
-                                    ->label('Banner Fotoğrafı')
-                                    ->image()
-                                    ->imageEditor()
-                                    ->imageEditorAspectRatios([
-                                        null,
-                                        '5:1',
-                                    ]),
-
-                                TextInput::make('seo_title')
-                                    ->label('SEO Başlık'),
-
-                                Textarea::make('seo_description')
-                                    ->label('SEO Açıklama'),
-
-                                DateTimePicker::make('published_at')
-                                    ->label('Yayın Tarihi')
-                                    ->default(now()),
+                Section::make('SEO & Görsel')
+                    ->columnSpan(1)
+                    ->schema([
+                        FileUpload::make('cover')
+                            ->label('Kapak Fotoğrafı')
+                            ->image()
+                            ->imageEditor()
+                            ->required()
+                            ->imageEditorAspectRatios([
+                                null,
+                                '4:3',
                             ]),
+
+                        FileUpload::make('banner')
+                            ->label('Banner Fotoğrafı')
+                            ->image()
+                            ->imageEditor()
+                            ->imageEditorAspectRatios([
+                                null,
+                                '5:1',
+                            ]),
+
+                        TextInput::make('seo_title')
+                            ->label('SEO Başlık'),
+
+                        Textarea::make('seo_description')
+                            ->label('SEO Açıklama'),
+
+                        DateTimePicker::make('published_at')
+                            ->label('Yayın Tarihi')
+                            ->default(now()),
                     ]),
             ]);
     }

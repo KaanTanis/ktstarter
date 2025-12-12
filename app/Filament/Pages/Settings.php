@@ -74,18 +74,15 @@ class Settings extends Page implements HasForms
                                     ->schema([
                                         FileUpload::make('site_logo')
                                             ->label('Site Logosu')
-                                            ->image()
-                                            ->webp(),
+                                            ->image(),
 
                                         FileUpload::make('site_logo_dark')
                                             ->label('Site Logosu (Karanlık)')
-                                            ->image()
-                                            ->webp(),
+                                            ->image(),
 
                                         FileUpload::make('favicon')
                                             ->label('Favicon')
-                                            ->image()
-                                            ->webp(),
+                                            ->image(),
                                     ]),
 
                                 Grid::make(2)

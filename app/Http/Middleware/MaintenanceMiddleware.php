@@ -19,7 +19,7 @@ class MaintenanceMiddleware
     {
         if ((bool) Setting::getValueByKey('maintenance_mode')) {
             if (! Auth::check()) {
-                abort(503);
+                abort(503, 'The site is under maintenance. Please check back later.');
             }
         }
 

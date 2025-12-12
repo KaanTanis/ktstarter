@@ -81,24 +81,3 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
 Fancybox.bind("[data-fancybox]", {
     // Your custom options
 });
-
-document.addEventListener("click", function (event) {
-    if (event.target.matches(".navMenu a")) {
-        document.getElementById("my-drawer").checked = false;
-        document.getElementById("my-drawer").classList.remove("open");
-        document.getElementById("my-drawer").classList.add("close");
-
-        let target = event.target.getAttribute("href");
-        if (target.startsWith("/")) {
-            target = target.substring(1);
-        }
-        let offset = document.querySelector(target).offsetTop;
-
-        gsap.to(window, {
-            duration: 0.5,
-            scrollTo: { y: offset, autoKill: false },
-        });
-
-        return false;
-    }
-});

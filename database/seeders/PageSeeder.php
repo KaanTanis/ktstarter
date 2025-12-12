@@ -25,9 +25,7 @@ class PageSeeder extends Seeder
             'layout' => DefaultLayout::getName(),
             'title' => 'Ana Sayfa',
             'blocks' => [
-                $this->createBlock('text', [
-                    'text' => 'lorem ipsum dolor sit amet consectetur adipiscing elit',
-                ]),
+                //
             ],
         ]);
     }
@@ -40,14 +38,10 @@ class PageSeeder extends Seeder
             'layout' => DefaultLayout::getName(),
             'title' => 'Hakkımızda',
             'blocks' => [
-                $this->createBlock('text', [
-                    'text' => 'lorem ipsum dolor sit amet consectetur adipiscing elit',
-                ]),
+                //
             ],
         ]);
     }
-
-    // [{"type":"text","data":{"text":"<p>test<\/p>"}}]
 
     protected function createBlock(string $name, array $fields)
     {

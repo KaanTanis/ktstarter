@@ -1,12 +1,14 @@
 @props([
     'page' => null,
+    'hideLayout' => false,
 ])
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-        data-theme="lofi"
+        data-theme="light"
         class="overflow-x-hidden scroll-smooth"
     >
+    <!--[if ENDBLOCK]>cacto.art<![endif]-->    
     <head>
         @if (app()->environment('production'))
         <!-- Google tag (gtag.js) -->
@@ -38,7 +40,11 @@
     
     <body class="!overflow-x-hidden antialiased">
         <x-preloader />
-        <x-layouts.navbar />
+
+        @if (! $hideLayout)
+            <x-layouts.navbar />
+        @endif
+        
 
         <main>
             {{ $slot }}
@@ -46,8 +52,11 @@
         
         <x-modals />
 
+        @if (! $hideLayout)
+            <x-layouts.footer />
+        @endif
+
         @livewireScriptConfig 
         @stack('footer')
-        <!--[if ENDBLOCK]>kaantanis.com<![endif]-->    
     </body>
 </html>

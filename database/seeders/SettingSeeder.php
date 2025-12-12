@@ -20,7 +20,7 @@ class SettingSeeder extends Seeder
             ],
             [
                 'key' => 'maintenance_message',
-                'value' => json_encode('Sitemiz şu an bakım aşamasındadır. Lütfen daha sonra tekrar deneyiniz.'),
+                'value' => json_encode('Bakım çalışması, lütfen daha sonra tekrar deneyiniz.'),
                 'data_type' => 'string',
             ],
             [
