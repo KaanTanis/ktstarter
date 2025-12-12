@@ -45,6 +45,8 @@ class UpdateViewsCount extends Command
             });
         });
 
+        $this->info('The views count has been updated.');
+
         Log::channel('custom')
             ->info('The views count has been updated.');
     }
