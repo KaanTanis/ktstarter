@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Page;
+use App\Models\Post;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Spatie\Sitemap\Sitemap;
@@ -30,33 +31,43 @@ class GenerateSitemap extends Command
     public function handle()
     {
         $homePage = Page::where('slug', '/')->first();
-
-        if (! $homePage) {
-            $this->warn('Homepage not found. Please seed pages before generating sitemap.');
-
+        
+        if (!$homePage) {
+            $this->warn('Homepage not found.');
             return self::FAILURE;
         }
 
-        $homeLastChange = $homePage->updated_at;
-        $homeUrl = $homePage->url ?? url('/');
-
         $sitemap = Sitemap::create()
-            ->add(Url::create($homeUrl)
-                ->setPriority(1)
-                ->setLastModificationDate(Carbon::parse($homeLastChange))
-                ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY));
+            ->add($this->createUrlFromModel($homePage, 1, Url::CHANGE_FREQUENCY_DAILY));
 
-        Page::where('slug', '!=', '/')->chunk(100, function ($pages) use ($sitemap) {
-            foreach ($pages as $page) {
-                $sitemap->add(
-                    Url::create($page->url ?? url('/'))
-                        ->setPriority(0.6)
-                        ->setLastModificationDate($page->updated_at)
-                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
-                );
-            }
-        });
+        // Pages
+        Page::where('slug', '!=', '/')
+            ->where('include_in_sitemap', true) // Sitemap'e dahil edilecekler
+            ->chunk(100, function ($pages) use ($sitemap) {
+                foreach ($pages as $page) {
+                    $sitemap->add($this->createUrlFromModel($page));
+                }
+            });
+
+        // Posts
+        Post::where('published_at', '<=', Carbon::now())
+            ->where('include_in_sitemap', true)
+            ->chunk(100, function ($posts) use ($sitemap) {
+                foreach ($posts as $post) {
+                    $sitemap->add($this->createUrlFromModel($post));
+                }
+            });
 
         $sitemap->writeToFile(public_path('sitemap.xml'));
+        
+        $this->info('Sitemap generated successfully!');
+    }
+
+    protected function createUrlFromModel($model, ?float $priority = null, ?string $changeFreq = null): Url
+    {
+        return Url::create($model->url ?? url('/'))
+            ->setPriority($priority ?? $model->getSitemapPriority())
+            ->setLastModificationDate($model->updated_at)
+            ->setChangeFrequency($changeFreq ?? $model->getSitemapChangeFrequency());
     }
 }

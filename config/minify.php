@@ -100,7 +100,6 @@ return [
         //   "*/download/*",
         //   "admin/*",
         //   "*/user"
-        'bloglar/*',
     ],
 
     /*

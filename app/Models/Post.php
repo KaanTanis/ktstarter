@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasSitemapAttributes;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,11 +11,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class Blog extends Model implements Viewable
+class Post extends Model implements Viewable
 {
     use HasFactory;
     use HasSlug;
     use InteractsWithViews;
+    use HasSitemapAttributes;
 
     protected $guarded = [];
 
@@ -44,12 +46,12 @@ class Blog extends Model implements Viewable
 
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class, 'post_tag');
     }
 
     public function getUrlAttribute()
     {
-        return route('blog', $this->slug);
+        return route('posts.show', $this);
     }
 
     public function scopePublished()

@@ -1,8 +1,8 @@
-<x-layouts.app>
+<x-layouts.app :hideLayout="true">
 <div class="h-screen w-screen bg-gray-50 flex items-center">
     <div class="container flex flex-col md:flex-row items-center justify-between px-5 text-gray-700">
-            <div class="w-full lg:w-1/2 mx-8">
-                <div class="text-7xl text-primary font-dark font-extrabold mb-8">404</div>
+        <div class="w-full lg:w-1/2 mx-8">
+            <div class="text-7xl text-primary font-dark font-extrabold mb-8">404</div>
             <p class="text-2xl md:text-3xl font-light leading-normal mb-8">
                 @lang('Üzgünüz, aradığınız sayfa bulunamadı.')
             </p>
@@ -10,7 +10,7 @@
             <a href="{{ url('/') }}" class="btn btn-primary">
                 @lang('Ana Sayfaya Dön')
             </a>
-    </div>
+        </div>
         <div class="w-full lg:flex lg:justify-end lg:w-1/2 mx-5 my-12">
             <svg id="aa03ddf9-f8f2-4819-a4ce-be9b0a220741" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" class="w-96 md:w-[42rem] h-auto" viewBox="0 0 1119.60911 699">
                 <title>server down</title>
@@ -66,7 +66,6 @@
                 <path d="M394,661.5c0,7.732-19.90861,23-42,23s-43-14.268-43-22,20.90861-6,43-6S394,653.768,394,661.5Z" transform="translate(-31.39089 -100.5)" fill="#fff"/>
             </svg>
         </div>
-    
     </div>
 </div>
 </x-layouts.app>

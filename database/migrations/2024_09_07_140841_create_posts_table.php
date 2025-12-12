@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('blogs', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
@@ -22,6 +22,11 @@ return new class extends Migration
             $table->string('seo_title')->nullable();
             $table->text('seo_description')->nullable();
             $table->unsignedBigInteger('views_count')->default(0);
+            $table->decimal('sitemap_priority', 2, 1)->default(0.6);
+            $table->enum('sitemap_change_freq', [
+                'always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly', 'never'
+            ])->default('weekly');
+            $table->boolean('include_in_sitemap')->default(true);
             $table->timestamps();
 
             $table->index('views_count');
@@ -29,6 +34,7 @@ return new class extends Migration
             $table->index('published_at');
             $table->index('created_at');
             $table->index('updated_at');
+            $table->index('include_in_sitemap');
         });
 
         Schema::create('tags', function (Blueprint $table) {
@@ -40,9 +46,9 @@ return new class extends Migration
             $table->index('slug');
         });
 
-        Schema::create('blog_tag', function (Blueprint $table) {
+        Schema::create('post_tag', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('blog_id')->constrained()->onDelete('cascade');
+            $table->foreignId('post_id')->constrained()->onDelete('cascade');
             $table->foreignId('tag_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
@@ -53,8 +59,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('blogs');
+        Schema::dropIfExists('posts');
         Schema::dropIfExists('tags');
-        Schema::dropIfExists('blog_tag');
+        Schema::dropIfExists('post_tag');
     }
 };

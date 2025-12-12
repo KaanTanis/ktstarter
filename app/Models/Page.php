@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasSitemapAttributes;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Support\Facades\Blade;
@@ -17,6 +18,7 @@ class Page extends BasePage implements Viewable
 {
     use HasSlug;
     use InteractsWithViews;
+    use HasSitemapAttributes;
 
     public function getRouteKeyName(): string
     {
@@ -47,6 +49,13 @@ class Page extends BasePage implements Viewable
 
     public function getSlugOptions(): SlugOptions
     {
+        if ($this->slug === '/') {
+            return SlugOptions::create()
+                ->generateSlugsFrom('title')
+                ->saveSlugsTo('slug')
+                ->doNotGenerateSlugsOnUpdate();
+        }
+        
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');

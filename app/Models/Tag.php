@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
@@ -26,8 +27,8 @@ class Tag extends Model
         return 'slug';
     }
 
-    public function blogs()
+    public function posts()
     {
-        return $this->belongsToMany(Blog::class);
+        return $this->belongsToMany(Post::class, 'post_tag');
     }
 }

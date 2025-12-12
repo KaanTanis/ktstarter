@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BlogResource\Pages\CreateBlog;
-use App\Filament\Resources\BlogResource\Pages\EditBlog;
-use App\Filament\Resources\BlogResource\Pages\ListBlogs;
-use App\Models\Blog;
+use App\Filament\Resources\PostResource\Pages\CreatePost;
+use App\Filament\Resources\PostResource\Pages\EditPost;
+use App\Filament\Resources\PostResource\Pages\ListPosts;
+use App\Models\Post;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -25,15 +25,15 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 
-class BlogResource extends Resource
+class PostResource extends Resource
 {
-    protected static ?string $model = Blog::class;
+    protected static ?string $model = Post::class;
 
     protected static string|\BackedEnum|null $navigationIcon = null;
 
-    protected static ?string $modelLabel = 'Blog';
+    protected static ?string $modelLabel = 'Post';
 
-    protected static ?string $pluralModelLabel = 'Bloglar';
+    protected static ?string $pluralModelLabel = 'Postlar';
 
     protected static string|\UnitEnum|null $navigationGroup = 'CMS';
 
@@ -152,9 +152,9 @@ class BlogResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListBlogs::route('/'),
-            'create' => CreateBlog::route('/create'),
-            'edit' => EditBlog::route('/{record}/edit'),
+            'index' => ListPosts::route('/'),
+            'create' => CreatePost::route('/create'),
+            'edit' => EditPost::route('/{record}/edit'),
         ];
     }
 }

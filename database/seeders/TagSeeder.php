@@ -12,7 +12,7 @@ class TagSeeder extends Seeder
     public function run(): void
     {
         $tags = [
-            'Blog',
+            'Post',
             'Haberler',
         ];
 

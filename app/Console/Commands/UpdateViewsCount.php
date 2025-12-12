@@ -2,32 +2,33 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Blog;
+use App\Models\Page;
+use App\Models\Post;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
-class UpdatePostViewsCount extends Command
+class UpdateViewsCount extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:update-post-views-count';
+    protected $signature = 'app:update-views-count';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Update the views count of the posts';
+    protected $description = 'Update the views count';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        Blog::chunk(100, function ($posts) {
+        Post::chunk(100, function ($posts) {
             $posts->each(function ($post) {
                 $post->update([
                     'views_count' => views($post)->count(),
@@ -35,7 +36,16 @@ class UpdatePostViewsCount extends Command
             });
         });
 
+        Page::chunk(100, function ($pages) {
+            $pages->each(function ($page) {
+                $page->loadMissing('parent');
+                $page->update([
+                    'views_count' => views($page)->count(),
+                ]);
+            });
+        });
+
         Log::channel('custom')
-            ->info('The views count of the posts has been updated.');
+            ->info('The views count has been updated.');
     }
 }

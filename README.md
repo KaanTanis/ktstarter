@@ -1,6 +1,6 @@
 # KT Starter Kit
 
-Laravel 12, Filament 4, Livewire 3 ve Tailwind 4 üzerine kurulmuş, SEO dostu ve çok dilli hazır bir başlangıç kiti. Blog, sayfa yönetimi, yönlendirme, bakım modu ve form toplama özellikleriyle üretime yakın bir temel sağlar.
+Laravel 12, Filament 4, Livewire 3 ve Tailwind 4 üzerine kurulmuş, SEO dostu ve çok dilli hazır bir başlangıç kiti. Post (haber/blog) içerik yönetimi, sayfa yönetimi, yönlendirme, bakım modu ve form toplama özellikleriyle üretime yakın bir temel sağlar.
 
 ## Neler Hazır?
 - Filament paneli ile **blog**, **sayfa**, **ayar** ve **kullanıcı/rol** yönetimi (Shield entegre)
@@ -38,7 +38,7 @@ chmod +x local_install.sh
 
 ## Kullanışlı Komutlar
 - Sitemap üret: `php artisan app:generate-sitemap`
-- Blog görüntülenme sayısını güncelle: `php artisan app:update-post-views-count`
+- Post görüntülenme sayısını güncelle: `php artisan app:update-post-views-count`
 - Cron/Schedule: `routes/console.php` içinde (sitemap günlük, views 30 dk)
 
 ## Yapı Taşları

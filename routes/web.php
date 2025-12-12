@@ -10,7 +10,7 @@ $panelPaths = collect(filament()->getPanels())
     ->filter();
 
 $excludedPaths = $panelPaths
-    ->merge(['filament', 'pulse'])
+    ->merge(['filament', 'pulse', 'haberler'])
     ->implode('|');
 
 Livewire::setUpdateRoute(fn ($handle) => Route::post('/livewire/update', $handle));
@@ -22,4 +22,8 @@ Route::group([
     Route::get('/{filamentFabricatorPage:slug?}', PageController::class)
         ->where('filamentFabricatorPage', "^(?!($excludedPaths)).*$")
         ->name('page');
+
+    Route::get('/haberler/{post:slug}', function() {
+        abort(404);
+    })->name('posts.show');
 });
