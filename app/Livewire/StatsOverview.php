@@ -2,10 +2,10 @@
 
 namespace App\Livewire;
 
-use Illuminate\Support\Facades\DB;
+use CyrildeWit\EloquentViewable\View;
+use Illuminate\Support\Facades\Cache;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use Illuminate\Support\Facades\Cache;
 
 class StatsOverview extends StatsOverviewWidget
 {
@@ -29,7 +29,8 @@ class StatsOverview extends StatsOverviewWidget
     private function getVisitorsCount(): int
     {
         return $this->cache('visitors_count', function () {
-            return DB::table('views')->count();
+            return View::query()
+                ->count();
         });
     }
 

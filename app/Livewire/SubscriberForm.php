@@ -15,7 +15,7 @@ class SubscriberForm extends Component
     use WithRateLimiting;
 
     #[Validate('required|email|unique:subscriber_forms', as: 'E-posta Adresi', translate: true)]
-    public string $email;
+    public string $email = '';
 
     public function save()
     {

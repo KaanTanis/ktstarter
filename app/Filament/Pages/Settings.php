@@ -70,37 +70,37 @@ class Settings extends Page implements HasForms
                                 Textarea::make('maintenance_message')
                                     ->label('Bakım Modu Mesajı'),
 
-                                Grid::make(3)
-                                    ->schema([
-                                        FileUpload::make('site_logo')
-                                            ->label('Site Logosu')
-                                            ->image(),
-
-                                        FileUpload::make('site_logo_dark')
-                                            ->label('Site Logosu (Karanlık)')
-                                            ->image(),
-
-                                        FileUpload::make('favicon')
-                                            ->label('Favicon')
-                                            ->image(),
-                                    ]),
-
                                 Grid::make(2)
                                     ->schema([
+                                        TextInput::make('contact_mail')
+                                            ->columnSpan(2)
+                                            ->label('Mail Birincil İletişim E-Postası')
+                                            ->email(),
+                                        Repeater::make('contact_mail_cc')
+                                            ->label('Mail CC İletişim E-Postaları')
+                                            ->addActionLabel('E-Posta Ekle')
+                                            ->columnSpan(2)
+                                            ->schema([
+                                                TextInput::make('email')
+                                                    ->label('E-Posta Adresi')
+                                                    ->email(),
+                                            ]),
+
                                         TextInput::make('email')
-                                            ->label('İletişim E-Postası')
+                                            ->label('E-Posta')
                                             ->email(),
                                         TextInput::make('phone')
-                                            ->label('İletişim Telefonu')
+                                            ->label('Telefon')
                                             ->tel(),
                                         TextInput::make('address')
-                                            ->label('İletişim Adresi'),
+                                            ->label('Adres'),
                                         TextInput::make('site_title')
+                                            ->helperText('Eğer görüntülenen içerik SEO ayarı boş ise, site başlığı kullanılacaktır.')
                                             ->label('Site Başlığı'),
-                                        TextInput::make('site_description')
+                                        Textarea::make('site_description')
+                                            ->columnSpan(2)
+                                            ->helperText('Eğer görüntülenen içerik SEO ayarı boş ise, site açıklaması kullanılacaktır.')
                                             ->label('Site Açıklaması'),
-                                        TextInput::make('copyright_text')
-                                            ->label('Telif Hakkı Yazısı'),
                                     ]),
                             ]),
 

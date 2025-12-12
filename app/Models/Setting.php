@@ -21,6 +21,6 @@ class Setting extends Model
 
     public static function getValueByKey($key)
     {
-        return static::whereKey($key)->first()->value ?? null;
+        return optional(static::whereKey($key)->first())->value;
     }
 }

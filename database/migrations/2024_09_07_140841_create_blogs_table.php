@@ -23,6 +23,12 @@ return new class extends Migration
             $table->text('seo_description')->nullable();
             $table->unsignedBigInteger('views_count')->default(0);
             $table->timestamps();
+
+            $table->index('views_count');
+            $table->index('slug');
+            $table->index('published_at');
+            $table->index('created_at');
+            $table->index('updated_at');
         });
 
         Schema::create('tags', function (Blueprint $table) {
@@ -30,6 +36,8 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->timestamps();
+
+            $table->index('slug');
         });
 
         Schema::create('blog_tag', function (Blueprint $table) {
@@ -46,5 +54,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('blogs');
+        Schema::dropIfExists('tags');
+        Schema::dropIfExists('blog_tag');
     }
 };

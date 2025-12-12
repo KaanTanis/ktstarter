@@ -18,6 +18,11 @@ class Page extends BasePage implements Viewable
     use HasSlug;
     use InteractsWithViews;
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     public function render(): string
     {
         $component = FilamentFabricator::getLayoutFromName($this->layout)::getComponent();
@@ -49,11 +54,17 @@ class Page extends BasePage implements Viewable
 
     public function getUrlAttribute(): false|string
     {
-        return $this->slug
-            ? route('page', [
-                'filamentFabricatorPage' => $this->slug,
-            ])
-            : false;
+        if (! $this->slug) {
+            return false;
+        }
+
+        if ($this->slug === '/') {
+            return url('/');
+        }
+
+        return route('page', [
+            'filamentFabricatorPage' => $this->slug,
+        ]);
     }
 
     public static function findBySlug(string $slug)
@@ -74,13 +85,5 @@ class Page extends BasePage implements Viewable
     public function getMenuUrl(): string
     {
         return $this->url;
-    }
-
-    public function exceptedTranslationStatusAttributes(): array
-    {
-        return [
-            'seo',
-            'breadcrumb',
-        ];
     }
 }

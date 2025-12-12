@@ -37,17 +37,6 @@ class UpdatePostViewsCount extends Command
             });
         });
 
-        $totalVisitor = View::query()
-            ->count();
-
-        $existingSetting = Setting::where('key', 'total_views_count')->first();
-        if (! $existingSetting || $existingSetting->value != $totalVisitor) {
-            Setting::updateOrCreate(
-                ['key' => 'total_views_count'],
-                ['value' => $totalVisitor]
-            );
-        }
-
         Log::channel('custom')
             ->info('The views count of the posts has been updated.');
     }

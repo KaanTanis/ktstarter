@@ -3,10 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Page;
-use App\Models\Project;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Storage;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
 
@@ -31,8 +29,16 @@ class GenerateSitemap extends Command
      */
     public function handle()
     {
-        $homeLastChange = Page::where('slug->'.app()->getLocale(), '/')->first()->updated_at;
-        $homeUrl = Page::where('slug->'.app()->getLocale(), '/')->first()->url;
+        $homePage = Page::where('slug', '/')->first();
+
+        if (! $homePage) {
+            $this->warn('Homepage not found. Please seed pages before generating sitemap.');
+
+            return self::FAILURE;
+        }
+
+        $homeLastChange = $homePage->updated_at;
+        $homeUrl = $homePage->url ?? url('/');
 
         $sitemap = Sitemap::create()
             ->add(Url::create($homeUrl)
@@ -40,20 +46,16 @@ class GenerateSitemap extends Command
                 ->setLastModificationDate(Carbon::parse($homeLastChange))
                 ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY));
 
-        // Project::chunk(100, function ($projects) use ($sitemap) {
-        //     foreach ($projects as $project) {
-        //         $url = Url::create(route('project', $project->slug))
-        //             ->setLastModificationDate($project->updated_at)
-        //             ->setPriority(0.9)
-        //             ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY);
-
-        //         if ($project->cover_2) {
-        //             $url->addImage(Storage::url($project->cover_2));
-        //         }
-
-        //         $sitemap->add($url);
-        //     }
-        // });
+        Page::where('slug', '!=', '/')->chunk(100, function ($pages) use ($sitemap) {
+            foreach ($pages as $page) {
+                $sitemap->add(
+                    Url::create($page->url ?? url('/'))
+                        ->setPriority(0.6)
+                        ->setLastModificationDate($page->updated_at)
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
+                );
+            }
+        });
 
         $sitemap->writeToFile(public_path('sitemap.xml'));
     }

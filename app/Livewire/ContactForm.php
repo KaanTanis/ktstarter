@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Mail\ContactMail;
 use App\Models\Form;
+use App\Models\Setting;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use DanHarrin\LivewireRateLimiting\WithRateLimiting;
 use Filament\Notifications\Notification;
@@ -78,13 +79,16 @@ class ContactForm extends Component
 
         Form::create(array_merge($this->formEls(), $extraData));
 
-        $recipients = [
-            // 'ccmail@example.com',
-        ];
+        $primaryRecipient = Setting::getValueByKey('contact_mail')
+            ?? config('mail.from.address');
 
-        Mail::to('kt@kaantanis.com')
-            ->cc($recipients)
-            ->send(new ContactMail($this->name, $this->phone, $this->message));
+        $recipients = array_filter((array) Setting::getValueByKey('contact_mail_cc'));
+
+        if ($primaryRecipient) {
+            Mail::to($primaryRecipient)
+                ->cc($recipients)
+                ->send(new ContactMail($this->name, $this->phone, $this->message));
+        }
 
         Notification::make()
             ->body('Mesajınız başarıyla iletildi')
