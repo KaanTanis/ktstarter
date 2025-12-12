@@ -8,7 +8,7 @@ Laravel 12, Filament 4, Livewire 3 ve Tailwind 4 üzerine kurulmuş, SEO dostu v
 - SEO & sosyal meta (SEOTools), sitemap üretimi, slug ve görüntülenme sayacı
 - URL yönlendirme ve bakım modu middleware'leri
 - İletişim/abonelik formları + hız sınırlama + bildirimler
-- Cookie/Privacy modalları ve hazır navbar/banner/footer bileşenleri
+- Cookie/Privacy modalları, temel layout bileşenleri (ihtiyaca göre özelleştirilebilir)
 
 ## Teknoloji Yığını
 - Backend: Laravel 12, Filament 4, Livewire 3, Filament Shield, Spatie Sluggable & Sitemap, Eloquent Viewable, Intervention Image
@@ -24,6 +24,13 @@ php artisan migrate --seed   # admin, sayfa ve ayarlar gelir
 npm run dev                  # Vite
 php artisan serve            # API/Frontend
 ```
+
+### Hızlı kurulum (tek komut)
+```bash
+chmod +x local_install.sh
+./local_install.sh
+```
+> Not: Script `.env.example` dosyasını taşır (varsa mevcut .env yedekleyin), sqlite kurar, migrate/seed ve build adımlarını çalıştırır.
 
 ### Varsayılan Girişler (Filament admin)
 - URL: `/admin`
