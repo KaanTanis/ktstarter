@@ -40,13 +40,6 @@ class Page extends BasePage implements Viewable
         );
     }
 
-    protected function handleForcePublished($query, bool $forcePublished = true): void
-    {
-        if (($forcePublished && ! request()->boolean('preview')) || ! auth('admin')->check()) {
-            $query->published();
-        }
-    }
-
     public function getSlugOptions(): SlugOptions
     {
         if ($this->slug === '/') {

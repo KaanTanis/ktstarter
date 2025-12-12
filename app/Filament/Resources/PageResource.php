@@ -35,6 +35,8 @@ class PageResource extends Resource
 {
     protected static ?int $navigationSort = 1;
 
+    protected static ?string $recordRouteKeyName = 'id';
+
     public static function getLabel(): ?string
     {
         return __('filament-fabricator::page-resource.labels.page');
@@ -55,7 +57,8 @@ class PageResource extends Resource
                         Group::make()->schema(FilamentFabricator::getSchemaSlot(ResourceSchemaSlot::BLOCKS_BEFORE)),
 
                         PageBuilder::make('blocks')
-                            ->label(__('filament-fabricator::page-resource.labels.blocks')),
+                            ->label(__('filament-fabricator::page-resource.labels.blocks'))
+                            ->addActionLabel(__('Yeni Blok Ekle')),
 
                         Group::make()->schema(FilamentFabricator::getSchemaSlot(ResourceSchemaSlot::BLOCKS_AFTER)),
                     ])
@@ -207,7 +210,7 @@ class PageResource extends Resource
         return [
             'index' => ListPages::route('/'),
             'create' => CreatePage::route('/create'),
-            'edit' => EditPage::route('/{record}/edit'),
+            'edit' => EditPage::route('/{record:id}/edit'),
         ];
     }
 }
