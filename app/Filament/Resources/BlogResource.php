@@ -2,19 +2,13 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Grid;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Utilities\Set;
-use Filament\Actions\EditAction;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use App\Filament\Resources\BlogResource\Pages\ListBlogs;
 use App\Filament\Resources\BlogResource\Pages\CreateBlog;
 use App\Filament\Resources\BlogResource\Pages\EditBlog;
-use App\Filament\Resources\BlogResource\Pages;
+use App\Filament\Resources\BlogResource\Pages\ListBlogs;
 use App\Models\Blog;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -22,7 +16,10 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -32,13 +29,13 @@ class BlogResource extends Resource
 {
     protected static ?string $model = Blog::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = null;
+    protected static string|\BackedEnum|null $navigationIcon = null;
 
     protected static ?string $modelLabel = 'Blog';
 
     protected static ?string $pluralModelLabel = 'Bloglar';
 
-    protected static string | \UnitEnum | null $navigationGroup = 'CMS';
+    protected static string|\UnitEnum|null $navigationGroup = 'CMS';
 
     protected static bool $shouldRegisterNavigation = true;
 

@@ -3,9 +3,9 @@
 namespace App\Livewire;
 
 use CyrildeWit\EloquentViewable\View;
-use Illuminate\Support\Facades\Cache;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+use Illuminate\Support\Facades\Cache;
 
 class StatsOverview extends StatsOverviewWidget
 {
@@ -22,7 +22,7 @@ class StatsOverview extends StatsOverviewWidget
                 ->icon('heroicon-o-users'),
 
             Stat::make('Diğer', 0)
-                ->icon('heroicon-o-chart-bar')  ,
+                ->icon('heroicon-o-chart-bar'),
         ];
     }
 
@@ -37,8 +37,8 @@ class StatsOverview extends StatsOverviewWidget
     private function cache(string $key, callable $resolver): mixed
     {
         return Cache::remember(
-            $key, 
-            now()->addSeconds(self::CACHE_TTL), 
+            $key,
+            now()->addSeconds(self::CACHE_TTL),
             $resolver
         );
     }

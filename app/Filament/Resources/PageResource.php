@@ -2,25 +2,24 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Group;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Utilities\Set;
-use Filament\Actions\Action;
-use Filament\Actions\ViewAction;
-use Filament\Actions\EditAction;
-use App\Filament\Resources\PageResource\Pages\ListPages;
 use App\Filament\Resources\PageResource\Pages\CreatePage;
 use App\Filament\Resources\PageResource\Pages\EditPage;
-use App\Filament\Resources\PageResource\Pages;
+use App\Filament\Resources\PageResource\Pages\ListPages;
 use Closure;
+use Filament\Actions\Action;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -160,8 +159,8 @@ class PageResource extends Resource
                 TextColumn::make('url')
                     ->label(__('filament-fabricator::page-resource.labels.url'))
                     ->toggleable()
-                    ->getStateUsing(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId((int)$record->id) ?: null)
-                    ->url(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId((int)$record->id) ?: null, true)
+                    ->getStateUsing(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId((int) $record->id) ?: null)
+                    ->url(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId((int) $record->id) ?: null, true)
                     ->visible(config('filament-fabricator.routing.enabled')),
 
                 TextColumn::make('layout')
@@ -187,7 +186,7 @@ class PageResource extends Resource
                 EditAction::make(),
                 Action::make('visit')
                     ->label(__('filament-fabricator::page-resource.actions.visit'))
-                    ->url(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId((int)$record->id) ?: null)
+                    ->url(fn (?PageContract $record) => FilamentFabricator::getPageUrlFromId((int) $record->id) ?: null)
                     ->icon('heroicon-o-arrow-top-right-on-square')
                     ->openUrlInNewTab()
                     ->color('success')

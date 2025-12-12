@@ -2,11 +2,10 @@
 
 namespace App\Filament\Resources\PageResource\Pages;
 
-use Filament\Actions\ViewAction;
+use App\Filament\Resources\PageResource;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
-use App\Filament\Resources\PageResource;
-use Filament\Actions;
+use Filament\Actions\ViewAction;
 use Z3d0X\FilamentFabricator\Resources\PageResource\Pages\EditPage as EditRecord;
 
 class EditPage extends EditRecord

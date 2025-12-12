@@ -3,8 +3,8 @@
 namespace App\Filament\Actions;
 
 use Filament\Actions\Action;
-use Filament\Schemas\Components\Utilities\Set;
 use Filament\Notifications\Notification;
+use Filament\Schemas\Components\Utilities\Set;
 use Illuminate\Support\Str;
 
 class GeneratePasswordAction extends Action

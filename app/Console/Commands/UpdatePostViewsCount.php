@@ -3,8 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Models\Blog;
-use App\Models\Setting;
-use CyrildeWit\EloquentViewable\View;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
