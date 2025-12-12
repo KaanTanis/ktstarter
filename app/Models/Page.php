@@ -16,9 +16,9 @@ use Z3d0X\FilamentFabricator\Models\Page as BasePage;
  */
 class Page extends BasePage implements Viewable
 {
+    use HasSitemapAttributes;
     use HasSlug;
     use InteractsWithViews;
-    use HasSitemapAttributes;
 
     public function getRouteKeyName(): string
     {
@@ -48,7 +48,7 @@ class Page extends BasePage implements Viewable
                 ->saveSlugsTo('slug')
                 ->doNotGenerateSlugsOnUpdate();
         }
-        
+
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');

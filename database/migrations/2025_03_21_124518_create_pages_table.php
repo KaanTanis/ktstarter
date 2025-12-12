@@ -20,13 +20,13 @@ return new class extends Migration
             // SEO and Sitemap fields
             $table->decimal('sitemap_priority', 2, 1)->default(0.6);
             $table->enum('sitemap_change_freq', [
-                'always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly', 'never'
+                'always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly', 'never',
             ])->default('weekly');
             $table->boolean('include_in_sitemap')->default(true);
             // -----------------------
             $table->unsignedBigInteger('views_count')->default(0);
             $table->timestamps();
-            
+
             $table->index(['parent_id', 'slug']);
             $table->index('include_in_sitemap');
             $table->index('views_count');

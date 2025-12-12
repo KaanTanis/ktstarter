@@ -31,9 +31,10 @@ class GenerateSitemap extends Command
     public function handle()
     {
         $homePage = Page::where('slug', '/')->first();
-        
-        if (!$homePage) {
+
+        if (! $homePage) {
             $this->warn('Homepage not found.');
+
             return self::FAILURE;
         }
 
@@ -59,7 +60,7 @@ class GenerateSitemap extends Command
             });
 
         $sitemap->writeToFile(public_path('sitemap.xml'));
-        
+
         $this->info('Sitemap generated successfully!');
     }
 

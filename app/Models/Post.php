@@ -14,9 +14,9 @@ use Spatie\Sluggable\SlugOptions;
 class Post extends Model implements Viewable
 {
     use HasFactory;
+    use HasSitemapAttributes;
     use HasSlug;
     use InteractsWithViews;
-    use HasSitemapAttributes;
 
     protected $guarded = [];
 

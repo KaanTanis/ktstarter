@@ -23,7 +23,7 @@ Route::group([
         ->where('filamentFabricatorPage', "^(?!($excludedPaths)).*$")
         ->name('page');
 
-    Route::get('/haberler/{post:slug}', function() {
+    Route::get('/haberler/{post:slug}', function () {
         abort(404);
     })->name('posts.show');
 });
