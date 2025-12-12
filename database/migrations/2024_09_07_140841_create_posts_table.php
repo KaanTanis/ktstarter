@@ -21,11 +21,13 @@ return new class extends Migration
             $table->dateTime('published_at')->nullable();
             $table->string('seo_title')->nullable();
             $table->text('seo_description')->nullable();
-            $table->unsignedBigInteger('views_count')->default(0);
+            // SEO and Sitemap fields
             $table->decimal('sitemap_priority', 2, 1)->default(0.6);
             $table->enum('sitemap_change_freq', [
                 'always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly', 'never'
             ])->default('weekly');
+            $table->boolean('include_in_sitemap')->default(true);
+            // -----------------------
             $table->boolean('include_in_sitemap')->default(true);
             $table->timestamps();
 
