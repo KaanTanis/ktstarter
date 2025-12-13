@@ -2,28 +2,30 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PostResource\Pages\CreatePost;
-use App\Filament\Resources\PostResource\Pages\EditPost;
-use App\Filament\Resources\PostResource\Pages\ListPosts;
 use App\Models\Post;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
-use Filament\Resources\Resource;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Utilities\Set;
-use Filament\Schemas\Schema;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
+use Filament\Schemas\Schema;
+use Filament\Actions\EditAction;
+use Filament\Resources\Resource;
+use Filament\Actions\BulkActionGroup;
+use Filament\Forms\Components\Select;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
+use App\Filament\Resources\PostResource\Pages\EditPost;
+use App\Filament\Resources\PostResource\Pages\ListPosts;
+use App\Filament\Resources\PostResource\Pages\CreatePost;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class PostResource extends Resource
 {
@@ -82,20 +84,24 @@ class PostResource extends Resource
                 Section::make('SEO & Görsel')
                     ->columnSpan(1)
                     ->schema([
-                        FileUpload::make('cover')
+                        SpatieMediaLibraryFileUpload::make('cover')
                             ->label('Kapak Fotoğrafı')
                             ->image()
                             ->imageEditor()
                             ->required()
+                            ->collection('cover')
+                            ->responsiveImages()
                             ->imageEditorAspectRatios([
                                 null,
                                 '4:3',
                             ]),
 
-                        FileUpload::make('banner')
+                        SpatieMediaLibraryFileUpload::make('banner')
                             ->label('Banner Fotoğrafı')
                             ->image()
                             ->imageEditor()
+                            ->collection('banner')
+                            ->responsiveImages()
                             ->imageEditorAspectRatios([
                                 null,
                                 '5:1',
@@ -118,7 +124,7 @@ class PostResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('cover')
+                SpatieMediaLibraryImageColumn::make('cover')
                     ->label('Kapak'),
 
                 TextColumn::make('title')

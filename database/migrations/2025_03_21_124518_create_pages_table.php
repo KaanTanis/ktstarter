@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create(config('filament-fabricator.table_name', 'pages'), function (Blueprint $table) {
             $table->id();
             $table->string('title')->index();
-            $table->string('slug')->unique();
+            $table->string('slug');
             $table->string('layout')->default('default')->index();
             $table->json('blocks');
             $table->foreignId('parent_id')->nullable()->constrained(config('filament-fabricator.table_name', 'pages'))->cascadeOnDelete()->cascadeOnUpdate();
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->unsignedBigInteger('views_count')->default(0);
             $table->timestamps();
 
-            $table->index(['parent_id', 'slug']);
+            $table->unique(['slug', 'parent_id']);
             $table->index('include_in_sitemap');
             $table->index('views_count');
         });

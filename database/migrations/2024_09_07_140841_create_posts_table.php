@@ -16,11 +16,10 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('content');
-            $table->string('cover')->nullable();
-            $table->string('banner')->nullable();
             $table->dateTime('published_at')->nullable();
             $table->string('seo_title')->nullable();
             $table->text('seo_description')->nullable();
+            $table->unsignedBigInteger('views_count')->default(0);
             // SEO and Sitemap fields
             $table->decimal('sitemap_priority', 2, 1)->default(0.6);
             $table->enum('sitemap_change_freq', [
@@ -28,7 +27,6 @@ return new class extends Migration
             ])->default('weekly');
             $table->boolean('include_in_sitemap')->default(true);
             // -----------------------
-            $table->boolean('include_in_sitemap')->default(true);
             $table->timestamps();
 
             $table->index('views_count');
