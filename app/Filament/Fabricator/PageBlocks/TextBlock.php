@@ -3,7 +3,7 @@
 namespace App\Filament\Fabricator\PageBlocks;
 
 use Filament\Forms\Components\Builder\Block;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\RichEditor;
 use Z3d0X\FilamentFabricator\PageBlocks\PageBlock;
 
 class TextBlock extends PageBlock
@@ -15,7 +15,7 @@ class TextBlock extends PageBlock
         return Block::make('text')
             ->label('Metin')
             ->schema([
-                SpatieMediaLibraryFileUpload::make('text')
+                RichEditor::make('text')
                     ->label('Metin'),
             ]);
     }
