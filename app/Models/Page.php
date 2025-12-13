@@ -2,24 +2,27 @@
 
 namespace App\Models;
 
+use Spatie\Sluggable\HasSlug;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\Sluggable\SlugOptions;
+use Illuminate\Support\Facades\Blade;
 use App\Models\Traits\HasSitemapAttributes;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
-use Illuminate\Support\Facades\Blade;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
-use Z3d0X\FilamentFabricator\Facades\FilamentFabricator;
 use Z3d0X\FilamentFabricator\Models\Page as BasePage;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Z3d0X\FilamentFabricator\Facades\FilamentFabricator;
 
 /**
  * @property string $url
  */
-class Page extends BasePage implements Viewable
+class Page extends BasePage implements Viewable, HasMedia
 {
     use HasSitemapAttributes;
     use HasSlug;
     use InteractsWithViews;
+    use InteractsWithMedia;
 
     public function getRouteKeyName(): string
     {
