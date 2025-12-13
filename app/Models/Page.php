@@ -6,6 +6,7 @@ use App\Models\Traits\HasSitemapAttributes;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Support\Facades\Blade;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Z3d0X\FilamentFabricator\Facades\FilamentFabricator;
@@ -23,6 +24,18 @@ class Page extends BasePage implements Viewable
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    protected $removeViewsOnDelete = true;
+
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('responsive')
+            ->withResponsiveImages()
+            ->format('webp')
+            ->quality(80)
+            ->nonQueued();
     }
 
     public function render(): string

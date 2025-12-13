@@ -10,16 +10,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class Post extends Model implements Viewable, HasMedia
+class Post extends Model implements HasMedia, Viewable
 {
     use HasFactory;
     use HasSitemapAttributes;
     use HasSlug;
-    use InteractsWithViews;
     use InteractsWithMedia;
+    use InteractsWithViews;
 
     protected $guarded = [];
 
@@ -28,6 +29,16 @@ class Post extends Model implements Viewable, HasMedia
     ];
 
     protected $removeViewsOnDelete = true;
+
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('responsive')
+            ->withResponsiveImages()
+            ->format('webp')
+            ->quality(80)
+            ->nonQueued();
+    }
 
     public function getSlugOptions(): SlugOptions
     {
