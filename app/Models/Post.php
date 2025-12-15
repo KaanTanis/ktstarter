@@ -28,6 +28,8 @@ class Post extends Model implements HasMedia, Viewable
         'published_at' => 'datetime',
     ];
 
+    protected $with = ['media'];
+
     protected $removeViewsOnDelete = true;
 
     public function registerMediaConversions(?Media $media = null): void

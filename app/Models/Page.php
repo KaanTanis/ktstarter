@@ -24,6 +24,8 @@ class Page extends BasePage implements HasMedia, Viewable
     use InteractsWithMedia;
     use InteractsWithViews;
 
+    protected $with = ['media'];
+
     public function getRouteKeyName(): string
     {
         return 'slug';
