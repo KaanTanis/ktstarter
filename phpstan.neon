@@ -6,3 +6,9 @@ parameters:
     level: 4
     ignoreErrors:
     excludePaths:
+
+#    ignoreErrors:
+#        - '#PHPDoc tag @var#'
+#
+#    excludePaths:
+#        - ./*/*/FileToBeExcluded.php

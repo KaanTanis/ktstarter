@@ -6,7 +6,7 @@
 touch database/database.sqlite
 
 # setup application
-mv .env.example .env
+cp .env.example .env
 
 # install dependencies and setup application
 npm install
